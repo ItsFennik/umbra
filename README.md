@@ -1,3 +1,5 @@
+# Umbra (MacOS Shell For Linux)
+
 A macOS-inspired Wayland desktop shell built with Quickshell and QML. Mostly vibe-coded (around 80%), held together by questionable decisions, AI-generated code, and pure delusion.
 
 This is a personal experiment, not a serious daily-driver project. Expect bugs, unfinished features, questionable code, random breakage, and the occasional miracle where something actually works. Development may be inconsistent, features may never get finished, and things might break for absolutely no reason.
