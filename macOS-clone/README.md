@@ -22,6 +22,7 @@ qs -p ~/Projects/macOS-clone
   - UPower: battery
   - `brightnessctl` plus a backlight device: display brightness
   - `gsettings`: dark/light mode
+  - `cava`: audio spectrum in the Now Playing and Visualizer widgets
   - `matugen`: wallpaper-matched colors (toggle in Control Center or `ipc call colors toggle`)
   - `ext-workspace-v1`: workspaces
   - window capture support: overview thumbnails (app icons otherwise)
@@ -56,6 +57,22 @@ hl.bind("SUPER + C",   hl.dsp.exec_cmd(umbra .. "controlcenter toggle"))
 Each target also has `open` and `close`; `notifications` has `clear`.
 `settings toggle` opens Umbra Settings (also in the logo menu and Control Center); `settings page <name>`
 opens a page: `user`, `appearance`, `wallpaper`, `dock`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
+`power toggle` opens the power menu (arrow keys and Enter, or the hinted letter: L, S, R, U, O); `power restart`, `shutdown` and `logout` ask first and
+count down from 60 seconds, `power sleep` and `lock` act at once. Lock Screen runs `loginctl lock-session`, so it needs
+a locker listening for it (e.g. hypridle with hyprlock).
+
+## Desktop widgets
+
+Right-click the wallpaper to add a widget: Now Playing (artwork, controls, progress and a cava
+spectrum), Visualizer (a cava spectrum without a frame) or Clock. Drag a widget to move it and
+right-click it to remove it. Widgets sit between the wallpaper and windows, and are stored in
+`$XDG_STATE_HOME/umbra/widgets.json`. cava only runs while a widget that uses it exists and
+something is playing.
+
+```sh
+qs -p ~/Projects/macOS-clone ipc call widgets add music   # or visualizer, clock
+qs -p ~/Projects/macOS-clone ipc call widgets clear
+```
 
 ## Layout
 
@@ -63,7 +80,7 @@ opens a page: `user`, `appearance`, `wallpaper`, `dock`, `icons`, `cursors`. Cho
 - `services/`: system and compositor integration, no UI
   - `services/adapters/`: compositor-specific extras, loaded only when detected
 - `components/`: shared widgets (icons, slider, switch, popup surface)
-- `modules/`: bar, dock, launcher, controlcenter, notifications, overview
+- `modules/`: bar, dock, launcher, controlcenter, notifications, overview, widgets
 
 Dock pins are stored in `$XDG_STATE_HOME/umbra/dock.json`, Umbra Settings in `settings.json` next to it.
 

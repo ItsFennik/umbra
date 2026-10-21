@@ -53,6 +53,18 @@ Scope {
                 }
             }
 
+            // Right-click the desktop to add widgets or change the wallpaper.
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                onPressed: mouse => ContextMenu.openAt([
+                    ...Widgets.types.map(t => ({ text: "Add " + t.text + " Widget", action: () => Widgets.add(t.id, window.screen, mouse.x, mouse.y) })),
+                    { separator: true },
+                    { text: "Change Wallpaper…", action: () => Panels.open("wallpaper", window.screen) },
+                    { text: "Umbra Settings…", action: () => Settings.windowOpen = true }
+                ], window.screen, mouse.x, mouse.y)
+            }
+
             WallpaperImage { id: a; source: Wallpaper.path }
             WallpaperImage { id: b }
 

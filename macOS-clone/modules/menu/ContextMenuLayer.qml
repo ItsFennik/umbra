@@ -53,7 +53,10 @@ LazyLoader {
                 const left = ContextMenu.edge === "bottom" ? ContextMenu.anchorX - width / 2 : ContextMenu.anchorX;
                 return Math.max(Theme.panelGap, Math.min(left, surface.width - width - Theme.panelGap));
             }
-            y: ContextMenu.edge === "bottom" ? surface.height - height - Theme.panelGap - ContextMenu.bottomInset : 4
+            // The surface starts below the bar, so point menus shift up by its height.
+            y: ContextMenu.edge === "bottom" ? surface.height - height - Theme.panelGap - ContextMenu.bottomInset
+                : ContextMenu.edge === "point" ? Math.max(4, Math.min(ContextMenu.anchorY - Theme.barHeight, surface.height - height - Theme.panelGap))
+                : 4
             width: Math.max(180, Math.min(340, maxRow)) + 10
             height: column.implicitHeight + 10
             radius: Theme.radiusMedium

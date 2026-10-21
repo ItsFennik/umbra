@@ -49,7 +49,14 @@ PanelWindow {
                 { text: "Umbra Settings…", action: () => Settings.windowOpen = true },
                 { text: "Wallpaper…", action: () => Panels.open("wallpaper", bar.screen) },
                 { separator: true },
-                { text: "Reload Umbra", action: () => Quickshell.reload(false) }
+                { text: "Reload Umbra", action: () => Quickshell.reload(false) },
+                { separator: true },
+                { text: "Sleep", action: () => Session.run("sleep") },
+                { text: "Restart…", action: () => Session.request("restart") },
+                { text: "Shut Down…", action: () => Session.request("shutdown") },
+                { separator: true },
+                { text: "Lock Screen", action: () => Session.run("lock") },
+                { text: "Log Out " + User.name + "…", action: () => Session.request("logout") }
             ], bar.screen, logo.mapToItem(null, 0, 0).x)
             Logo {}
         }
@@ -104,6 +111,13 @@ PanelWindow {
             active: Panels.current === "notifications"
             onClicked: Panels.toggle("notifications", bar.screen)
             Clock {}
+        }
+
+        BarButton {
+            anchors.verticalCenter: parent.verticalCenter
+            active: Panels.current === "power"
+            onClicked: active ? Panels.close() : Session.request("", bar.screen)
+            Icon { name: "power"; size: 15 }
         }
     }
 }

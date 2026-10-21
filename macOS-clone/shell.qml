@@ -10,12 +10,15 @@ import qs.modules.launcher
 import qs.modules.menu
 import qs.modules.notifications
 import qs.modules.overview
+import qs.modules.power
 import qs.modules.settings
 import qs.modules.wallpaper
+import qs.modules.widgets
 
 ShellRoot {
     WallpaperLayer {}
     WallpaperPicker {}
+    DesktopWidgets {}
 
     Variants {
         model: Quickshell.screens
@@ -34,4 +37,5 @@ ShellRoot {
     Overview {}
     ContextMenuLayer {}
     SettingsApp {}
+    PowerDialog {}
 }

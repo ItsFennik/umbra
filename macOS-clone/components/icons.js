@@ -16,6 +16,7 @@ var paths = {
     "sun": "M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0 M12 2v2 M12 20v2 M4.93 4.93l1.41 1.41 M17.66 17.66l1.41 1.41 M2 12h2 M20 12h2 M6.34 17.66l-1.41 1.41 M19.07 4.93l-1.41 1.41",
     "moon": "M12 3a6 6 0 0 0 9 9a9 9 0 1 1-9-9z",
     "contrast": "M2 12a10 10 0 1 0 20 0a10 10 0 1 0-20 0 M12 2v20",
+    "music": "M9 18V5l12-2v13 M3 18a3 3 0 1 0 6 0a3 3 0 1 0-6 0 M15 16a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
     "play": "M7 4l13 8-13 8z",
     "pause": "M6 4h4v16H6z M14 4h4v16h-4z",
     "next": "M5 5l9 7-9 7z M19 5v14",
@@ -37,7 +38,10 @@ var paths = {
     "shapes": "M3 3h7v7H3z M17.5 3a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7 M6.5 14l4 7h-8z M14 14h7v7h-7z",
     "search": "M10 3a7 7 0 1 0 0 14a7 7 0 1 0 0-14 M21 21l-5.5-5.5",
     "grid": "M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z",
-    "bolt": "M13 2L4 14h7l-1 8 9-12h-7z"
+    "bolt": "M13 2L4 14h7l-1 8 9-12h-7z",
+    "power": "M12 2v10 M18.36 6.64a9 9 0 1 1-12.73 0",
+    "restart": "M21 12a9 9 0 1 1-2.64-6.36L21 8 M21 3v5h-5",
+    "log-out": "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9"
 };
 
 // Icons drawn as solid shapes rather than outlines.

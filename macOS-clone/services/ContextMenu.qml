@@ -11,9 +11,10 @@ Singleton {
 
     property var handle: null
     property var items: []
-    // Horizontal anchor in screen coordinates; "top" menus hang below the bar,
-    // "bottom" menus sit above the dock, centered on anchorX.
+    // Anchor in screen coordinates; "top" menus hang below the bar, "bottom" menus
+    // sit above the dock, centered on anchorX, and "point" menus open at (anchorX, anchorY).
     property real anchorX: 0
+    property real anchorY: 0
     property string edge: "top"
     // Extra space to leave below "bottom" menus.
     property real bottomInset: 0
@@ -29,6 +30,13 @@ Singleton {
         items = menuItems;
         bottomInset = inset ?? 0;
         show(screen, x, menuEdge ?? "top");
+    }
+
+    function openAt(menuItems, screen, x, y) {
+        handle = null;
+        items = menuItems;
+        anchorY = y;
+        show(screen, x, "point");
     }
 
     function show(screen, x, menuEdge) {
