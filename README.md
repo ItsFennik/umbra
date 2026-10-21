@@ -39,7 +39,7 @@ Umbra aims to bring a clean, cohesive desktop experience to Linux through a cust
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/umbra.git
+git clone https://github.com/ItsFennik/umbra.git
 cd umbra
 ```
 
@@ -70,4 +70,4 @@ Contributions, suggestions, and bug reports are welcome. Feel free to open an is
 
 ## License
 
-MIT
+GNU GPL V.2
