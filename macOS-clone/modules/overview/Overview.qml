@@ -34,7 +34,7 @@ Scope {
             WlrLayershell.namespace: "umbra-overview"
             WlrLayershell.layer: WlrLayer.Overlay
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-            BackgroundEffect.blurRegion: Region { item: backdrop }
+            BackgroundEffect.blurRegion: Region { item: Theme.blur ? backdrop : null }
 
             readonly property var workspaces: Compositor.workspacesFor(window.screen)
             readonly property var activeWorkspace: workspaces.find(w => w.active) ?? null
@@ -107,7 +107,7 @@ Scope {
                                     return n === 0 ? "Empty" : n === 1 ? "1 window" : n + " windows";
                                 }
                                 color: Theme.textSecondary
-                                font { family: Theme.font; pixelSize: 11 }
+                                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
                             }
                         }
 
@@ -115,7 +115,7 @@ Scope {
                             anchors { horizontalCenter: parent.horizontalCenter; bottom: parent.bottom }
                             text: "Desktop " + space.modelData.name
                             color: "white"
-                            font { family: Theme.font; pixelSize: 12; weight: space.modelData.active ? Font.DemiBold : Font.Normal }
+                            font { family: Theme.font; pixelSize: Theme.px(12); weight: Theme.weight(space.modelData.active ? Font.DemiBold : Font.Normal) }
                         }
                     }
                 }
@@ -126,7 +126,7 @@ Scope {
                 visible: !window.filtered
                 text: "Showing windows from all workspaces — this compositor does not report window workspaces."
                 color: Qt.rgba(1, 1, 1, 0.7)
-                font { family: Theme.font; pixelSize: 12 }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
             }
 
             // Window grid
@@ -154,7 +154,7 @@ Scope {
                     visible: area.count === 0
                     text: "No open windows"
                     color: Qt.rgba(1, 1, 1, 0.7)
-                    font { family: Theme.font; pixelSize: 14 }
+                    font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(14) }
                 }
 
                 Flow {
@@ -244,7 +244,7 @@ Scope {
                                     text: tile.modelData.title || Apps.nameFor(tile.modelData)
                                     elide: Text.ElideRight
                                     color: "white"
-                                    font { family: Theme.font; pixelSize: 12; weight: tile.containsMouse ? Font.DemiBold : Font.Normal }
+                                    font { family: Theme.font; pixelSize: Theme.px(12); weight: Theme.weight(tile.containsMouse ? Font.DemiBold : Font.Normal) }
                                 }
                             }
                         }

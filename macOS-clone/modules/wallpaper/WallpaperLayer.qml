@@ -82,7 +82,7 @@ Scope {
                     else if (status === Image.Error)
                         console.warn("Umbra: cannot load wallpaper", source);
                 }
-                Behavior on opacity { NumberAnimation { duration: 400; easing.type: Theme.easing } }
+                Behavior on opacity { NumberAnimation { duration: Theme.ms(400); easing.type: Theme.easing } }
             }
         }
     }

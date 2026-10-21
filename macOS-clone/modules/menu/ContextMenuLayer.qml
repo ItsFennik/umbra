@@ -13,7 +13,7 @@ LazyLoader {
         id: surface
 
         panelName: "menu"
-        BackgroundEffect.blurRegion: Region { item: panel }
+        BackgroundEffect.blurRegion: Region { item: Theme.blur ? panel : null }
 
         // Submenus open in place; the last handle is the one shown.
         property var stack: ContextMenu.handle ? [ContextMenu.handle] : []

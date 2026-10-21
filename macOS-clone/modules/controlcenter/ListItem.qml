@@ -44,7 +44,7 @@ MouseArea {
         text: root.text + (root.detail ? "  " : "")
         elide: Text.ElideRight
         color: Theme.text
-        font { family: Theme.font; pixelSize: 13 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
     }
 
     Text {
@@ -52,7 +52,7 @@ MouseArea {
         visible: root.detail !== ""
         text: root.detail
         color: Theme.textSecondary
-        font { family: Theme.font; pixelSize: 11 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
     }
 
     Icon {

@@ -21,7 +21,7 @@ PanelWindow {
 
     WlrLayershell.namespace: "umbra-bar"
     WlrLayershell.layer: WlrLayer.Top
-    BackgroundEffect.blurRegion: Region { item: background }
+    BackgroundEffect.blurRegion: Region { item: Theme.blur ? background : null }
 
     Rectangle {
         id: background

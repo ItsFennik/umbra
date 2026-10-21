@@ -49,7 +49,7 @@ MouseArea {
         elide: Text.ElideRight
         color: root.highlighted ? Theme.onAccent : Theme.text
         opacity: root.enabled ? 1 : 0.4
-        font { family: Theme.font; pixelSize: 13 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
     }
 
     Icon {

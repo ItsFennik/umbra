@@ -9,4 +9,9 @@ Singleton {
     readonly property bool available: device.isPresent && device.isLaptopBattery
     readonly property real percentage: device.percentage
     readonly property bool charging: device.state === UPowerDeviceState.Charging || device.state === UPowerDeviceState.FullyCharged
+    readonly property bool full: device.state === UPowerDeviceState.FullyCharged
+    // Seconds until empty or full; 0 while UPower is still estimating.
+    readonly property real timeToEmpty: device.timeToEmpty
+    readonly property real timeToFull: device.timeToFull
+    readonly property real healthPercentage: device.healthSupported ? device.healthPercentage : 0
 }

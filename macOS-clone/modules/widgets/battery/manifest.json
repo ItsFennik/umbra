@@ -1,0 +1,17 @@
+{
+    "name": "Battery",
+    "description": "Charge level, charging state and time remaining from UPower",
+    "icon": "battery",
+    "order": 50,
+    "width": 170,
+    "height": 180,
+    "minWidth": 130,
+    "minHeight": 140,
+    "maxWidth": 400,
+    "maxHeight": 400,
+    "glass": true,
+    "settings": [
+        { "key": "showTime", "label": "Show time remaining", "type": "bool", "default": true },
+        { "key": "lowLevel", "label": "Low battery warning", "type": "range", "from": 5, "to": 40, "step": 5, "unit": "%", "default": 20 }
+    ]
+}

@@ -132,7 +132,7 @@ PanelWindow {
 
     WlrLayershell.namespace: "umbra-dock"
     WlrLayershell.layer: WlrLayer.Top
-    BackgroundEffect.blurRegion: Region { item: body }
+    BackgroundEffect.blurRegion: Region { item: Theme.blur ? body : null }
     // Only the dock itself takes input; the magnification headroom joins while hovered.
     mask: Region { item: dock.hovered || dock.dragging ? hoverArea : dock.revealed ? body : edgeTrigger }
 

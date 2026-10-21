@@ -25,7 +25,7 @@ Scope {
             id: surface
 
             panelName: "controlcenter"
-            BackgroundEffect.blurRegion: Region { item: panel }
+            BackgroundEffect.blurRegion: Region { item: Theme.blur ? panel : null }
 
             property string page: ""
             Component.onCompleted: Brightness.refresh()
@@ -243,6 +243,6 @@ Scope {
 
     component SectionTitle: Text {
         color: Theme.text
-        font { family: Theme.font; pixelSize: 12; weight: Font.DemiBold }
+        font { family: Theme.font; pixelSize: Theme.px(12); weight: Theme.weight(Font.DemiBold) }
     }
 }

@@ -9,6 +9,7 @@ MouseArea {
     property string title
     property string subtitle
     property bool selected: false
+    property int leftPadding: 12
     default property alias trailing: slot.data
 
     width: parent.width
@@ -17,13 +18,13 @@ MouseArea {
 
     Rectangle {
         visible: root.y > 0
-        anchors { left: parent.left; right: parent.right; top: parent.top; leftMargin: 12; rightMargin: 12 }
+        anchors { left: parent.left; right: parent.right; top: parent.top; leftMargin: root.leftPadding; rightMargin: 12 }
         height: 1
         color: Theme.hairline
     }
 
     Column {
-        anchors { left: parent.left; leftMargin: 12; right: slot.left; rightMargin: 12; verticalCenter: parent.verticalCenter }
+        anchors { left: parent.left; leftMargin: root.leftPadding; right: slot.left; rightMargin: 12; verticalCenter: parent.verticalCenter }
         spacing: 2
 
         Text {
@@ -31,7 +32,7 @@ MouseArea {
             text: root.title
             elide: Text.ElideRight
             color: Theme.text
-            font { family: Theme.font; pixelSize: 13 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
         }
 
         Text {
@@ -42,7 +43,7 @@ MouseArea {
             maximumLineCount: 2
             elide: Text.ElideRight
             color: Theme.textSecondary
-            font { family: Theme.font; pixelSize: 11 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
         }
     }
 

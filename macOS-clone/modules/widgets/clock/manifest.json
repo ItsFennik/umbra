@@ -1,0 +1,17 @@
+{
+    "name": "Clock",
+    "description": "Large time and date over the wallpaper",
+    "icon": "clock",
+    "order": 30,
+    "width": 320,
+    "height": 150,
+    "minWidth": 160,
+    "minHeight": 70,
+    "maxWidth": 960,
+    "maxHeight": 450,
+    "settings": [
+        { "key": "format", "label": "Time format", "type": "choice", "default": "24", "options": [{ "value": "24", "text": "24-hour" }, { "value": "12", "text": "12-hour" }] },
+        { "key": "showSeconds", "label": "Show seconds", "type": "bool", "default": false },
+        { "key": "showDate", "label": "Show date", "type": "bool", "default": true }
+    ]
+}

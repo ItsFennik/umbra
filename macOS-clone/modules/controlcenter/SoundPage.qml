@@ -11,7 +11,7 @@ DetailPage {
         topPadding: 4
         text: "Output"
         color: Theme.textSecondary
-        font { family: Theme.font; pixelSize: 11; weight: Font.DemiBold }
+        font { family: Theme.font; pixelSize: Theme.px(11); weight: Theme.weight(Font.DemiBold) }
     }
 
     Repeater {

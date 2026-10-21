@@ -12,7 +12,7 @@ LazyLoader {
 
     PopupSurface {
         panelName: "wallpaperpicker"
-        BackgroundEffect.blurRegion: Region { item: panel }
+        BackgroundEffect.blurRegion: Region { item: Theme.blur ? panel : null }
 
         Rectangle {
             id: panel
@@ -44,13 +44,13 @@ LazyLoader {
                     Text {
                         text: "Wallpaper"
                         color: Theme.text
-                        font { family: Theme.font; pixelSize: 16; weight: Font.DemiBold }
+                        font { family: Theme.font; pixelSize: Theme.px(16); weight: Theme.weight(Font.DemiBold) }
                     }
 
                     Text {
                         text: Wallpaper.directory.replace(Quickshell.env("HOME"), "~") + " · " + folder.count + " images"
                         color: Theme.textSecondary
-                        font { family: Theme.font; pixelSize: 11 }
+                        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
                     }
                 }
 
@@ -63,7 +63,7 @@ LazyLoader {
                         anchors.verticalCenter: parent.verticalCenter
                         text: "Match colors"
                         color: Theme.textSecondary
-                        font { family: Theme.font; pixelSize: 12 }
+                        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
                     }
 
                     Switch {
@@ -87,7 +87,7 @@ LazyLoader {
                 visible: folder.status === FolderListModel.Ready && folder.count === 0
                 text: "No images in this folder"
                 color: Theme.textSecondary
-                font { family: Theme.font; pixelSize: 13 }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
             }
 
             GridView {

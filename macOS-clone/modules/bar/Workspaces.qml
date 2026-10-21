@@ -39,8 +39,8 @@ Row {
                 color: item.modelData.active ? Theme.text : Theme.textSecondary
                 font {
                     family: Theme.font
-                    pixelSize: 12
-                    weight: item.modelData.active ? Font.DemiBold : Font.Normal
+                    pixelSize: Theme.px(12)
+                    weight: Theme.weight(item.modelData.active ? Font.DemiBold : Font.Normal)
                     features: { "tnum": 1 }
                 }
             }

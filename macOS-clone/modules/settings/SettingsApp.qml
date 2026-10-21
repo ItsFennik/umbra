@@ -8,6 +8,8 @@ import qs.services
 // Umbra Settings, a regular window laid out like macOS System Settings.
 //   qs -p <umbra dir> ipc call settings toggle
 //   qs -p <umbra dir> ipc call settings page dock
+//   qs -p <umbra dir> ipc call settings set animations false      (any key in services/Settings.qml)
+//   qs -p <umbra dir> ipc call profiles apply <name>               (also: list, save <name>, remove <name>)
 Scope {
     IpcHandler {
         target: "settings"
@@ -16,6 +18,31 @@ Scope {
         function open(): void { Settings.windowOpen = true; }
         function close(): void { Settings.windowOpen = false; }
         function page(name: string): void { Settings.openPage(name); }
+        function get(key: string): string { return JSON.stringify(Settings.value(key)); }
+        // Values are JSON (true, 14, "Inter"); anything else is taken as a string.
+        function set(key: string, value: string): string {
+            if (!Settings.keys.includes(key))
+                return "unknown setting: " + key;
+            let parsed;
+            try {
+                parsed = JSON.parse(value);
+            } catch (e) {
+                parsed = value;
+            }
+            if (typeof parsed !== typeof Config[key])
+                return key + " expects a " + typeof Config[key];
+            Settings.set(key, parsed);
+            return "ok";
+        }
+    }
+
+    IpcHandler {
+        target: "profiles"
+
+        function list(): string { return Profiles.list.map(p => p.name).join("\n"); }
+        function apply(name: string): string { return Profiles.apply(name) ? "ok" : "no profile named " + name; }
+        function save(name: string): string { return Profiles.save(name) ? "ok" : "a name is needed"; }
+        function remove(name: string): void { Profiles.remove(name); }
     }
 
     LazyLoader {
@@ -26,8 +53,12 @@ Scope {
 
             readonly property var pages: [
                 { id: "appearance", text: "Appearance", icon: "contrast", tint: "#3a3a3c", keywords: "dark light mode colors matugen accent" },
+                { id: "fonts", text: "Fonts", icon: "type", tint: "#5e5ce6", keywords: "font typeface text size weight emoji fallback" },
                 { id: "wallpaper", text: "Wallpaper", icon: "image", tint: "#32ade6", keywords: "background picture" },
                 { id: "dock", text: "Desktop & Dock", icon: "monitor", tint: "#636366", keywords: "size magnification zoom hide effects animation indicators" },
+                { id: "widgets", text: "Widgets", icon: "grid", tint: "#30b0c7", keywords: "desktop clock calendar battery network speed cpu memory ram music media visualizer workspaces layout" },
+                { id: "profiles", text: "Profiles", icon: "layers", tint: "#34c759", keywords: "profile save switch theme layout configuration preset" },
+                { id: "performance", text: "Performance", icon: "gauge", tint: "#ff453a", keywords: "animations motion blur transparency speed battery reduce" },
                 { id: "icons", text: "Icons", icon: "shapes", tint: "#ff9f0a", keywords: "icon theme whitesur" },
                 { id: "cursors", text: "Cursors", icon: "cursor", tint: "#bf5af2", keywords: "pointer mouse size" }
             ]
@@ -78,7 +109,7 @@ Scope {
                             selectionColor: Theme.accent
                             selectedTextColor: Theme.onAccent
                             clip: true
-                            font { family: Theme.font; pixelSize: 13 }
+                            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
 
                             Text {
                                 visible: search.text === ""
@@ -145,7 +176,7 @@ Scope {
                     anchors { left: parent.left; top: parent.top; leftMargin: 28; topMargin: 18 }
                     text: window.current.text
                     color: Theme.text
-                    font { family: Theme.font; pixelSize: 15; weight: Font.Bold }
+                    font { family: Theme.font; pixelSize: Theme.px(15); weight: Theme.weight(Font.Bold) }
                 }
 
                 Rectangle {
@@ -171,8 +202,12 @@ Scope {
                         source: ({
                             user: "UserPage.qml",
                             appearance: "AppearancePage.qml",
+                            fonts: "FontsPage.qml",
                             wallpaper: "WallpaperPage.qml",
                             dock: "DockPage.qml",
+                            widgets: "WidgetsPage.qml",
+                            profiles: "ProfilesPage.qml",
+                            performance: "PerformancePage.qml",
                             icons: "IconsPage.qml",
                             cursors: "CursorsPage.qml"
                         })[Settings.page] ?? "AppearancePage.qml"

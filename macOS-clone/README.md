@@ -23,6 +23,9 @@ qs -p ~/Projects/macOS-clone
   - `brightnessctl` plus a backlight device: display brightness
   - `gsettings`: dark/light mode
   - `cava`: audio spectrum in the Now Playing and Visualizer widgets
+  - `wl-clipboard`: copying from the launcher (calculator results, emoji, clipboard history)
+  - `cliphist`: clipboard history in the launcher (`c>`), with `wl-paste --watch cliphist store` running
+  - a terminal for `> command` in the launcher: `$TERMINAL`, else foot, kitty, alacritty, …
   - `matugen`: wallpaper-matched colors (toggle in Control Center or `ipc call colors toggle`)
   - `ext-workspace-v1`: workspaces
   - window capture support: overview thumbnails (app icons otherwise)
@@ -56,22 +59,86 @@ hl.bind("SUPER + C",   hl.dsp.exec_cmd(umbra .. "controlcenter toggle"))
 
 Each target also has `open` and `close`; `notifications` has `clear`.
 `settings toggle` opens Umbra Settings (also in the logo menu and Control Center); `settings page <name>`
-opens a page: `user`, `appearance`, `wallpaper`, `dock`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
+opens a page: `user`, `appearance`, `fonts`, `wallpaper`, `dock`, `widgets`, `profiles`, `performance`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
 `power toggle` opens the power menu (arrow keys and Enter, or the hinted letter: L, S, R, U, O); `power restart`, `shutdown` and `logout` ask first and
 count down from 60 seconds, `power sleep` and `lock` act at once. Lock Screen runs `loginctl lock-session`, so it needs
 a locker listening for it (e.g. hypridle with hyprlock).
 
-## Desktop widgets
+## Launcher
 
-Right-click the wallpaper to add a widget: Now Playing (artwork, controls, progress and a cava
-spectrum), Visualizer (a cava spectrum without a frame) or Clock. Drag a widget to move it and
-right-click it to remove it. Widgets sit between the wallpaper and windows, and are stored in
-`$XDG_STATE_HOME/umbra/widgets.json`. cava only runs while a widget that uses it exists and
-something is playing.
+Type to search apps (frequently launched ones rank higher). Arithmetic such as `2*(3+4)^2` or
+`sqrt(2)` shows its result; Enter copies it. A prefix switches mode, shown as a chip:
+
+| Prefix | Mode |
+| --- | --- |
+| `e>` | Emoji search; Enter copies the emoji |
+| `c>` | Clipboard history from cliphist; Enter copies, Shift+Delete removes |
+| `>` | Shell command; Enter runs it in a terminal, Shift+Enter in the background |
+| `=` | Calculator, showing why an expression does not parse |
+
+With an empty field it lists recent searches. Keys: ↑/↓, Ctrl+P/N, Tab/Shift+Tab and Page Up/Down
+select; Ctrl+1–9 picks a visible row; Esc clears the field, then leaves the mode, then closes;
+Backspace in an empty field leaves the mode. The footer shows the keys for the selected row.
+History is kept in `$XDG_STATE_HOME/umbra/launcher.json`.
 
 ```sh
-qs -p ~/Projects/macOS-clone ipc call widgets add music   # or visualizer, clock
+qs -p ~/Projects/macOS-clone ipc call launcher emoji        # also: clipboard, command, search <text>
+```
+
+## Desktop widgets
+
+Right-click the wallpaper to add a widget, or use Settings > Widgets. Built in: Now Playing (media
+controls), Visualizer, Clock, Calendar, Battery, Network Speed, CPU & Memory and Workspaces, all from
+live system data (MPRIS, cava, UPower, `/proc`, ext-workspace). Drag a widget to move it, drag its
+corner to resize it (Shift keeps its shape), right-click it to restack, reset or remove it, or for
+its settings. Settings > Widgets lists them in stacking order; drag the grip to restack. Widgets sit
+between the wallpaper and windows, and are stored in `$XDG_STATE_HOME/umbra/widgets.json`. cava only
+runs while a visible spectrum exists and something is playing; `/proc` is only read while a system
+widget is on screen.
+
+```sh
+qs -p ~/Projects/macOS-clone ipc call widgets add calendar  # see `widgets types`
 qs -p ~/Projects/macOS-clone ipc call widgets clear
+```
+
+### Writing a widget
+
+Each folder in `modules/widgets/` with a `manifest.json` and a `Widget.qml` is a widget type; it
+appears in the menus and in Settings without registering anywhere (`widgets reload` rescans).
+
+```json
+{
+    "name": "Uptime", "description": "Time since boot", "icon": "clock",
+    "width": 200, "height": 90, "minWidth": 140, "minHeight": 70, "glass": true,
+    "settings": [
+        { "key": "seconds", "label": "Show seconds", "type": "bool", "default": false },
+        { "key": "style", "label": "Style", "type": "choice", "default": "short",
+          "options": [{ "value": "short", "text": "Short" }, { "value": "long", "text": "Long" }] }
+    ]
+}
+```
+
+`Widget.qml` has a `WidgetBase` root (`import qs.modules.widgets`) and reads its settings from
+`options`; setting types are `bool`, `range` (`from`, `to`, `step`, `unit`), `choice` and `text`,
+and Settings builds their controls. `WidgetCard` draws the standard glass card and `Sparkline` a
+small graph. See `services/Widgets.qml` for every manifest field.
+
+## Fonts, profiles and performance
+
+- **Fonts** sets Umbra's interface font, size and weight, plus a fallback font (used when the chosen
+  font is not installed) and the emoji font. Hovering a font previews it. Only Umbra changes;
+  GTK, Qt and fontconfig settings are left alone.
+- **Profiles** save the current setup under a name: every Umbra setting, light or dark mode,
+  wallpaper colors, wallpaper, desktop widgets and Dock pins (not icon or cursor themes, which are
+  system-wide). Stored in `$XDG_STATE_HOME/umbra/profiles.json`.
+- **Performance** toggles animations, blur and transparency independently. Without blur, surfaces
+  use denser tints; without transparency, they are solid.
+
+Everything applies live. From a keybind or script:
+
+```sh
+qs -p ~/Projects/macOS-clone ipc call settings set animations false   # any key in services/Settings.qml
+qs -p ~/Projects/macOS-clone ipc call profiles apply Evening           # also: list, save <name>, remove <name>
 ```
 
 ## Layout

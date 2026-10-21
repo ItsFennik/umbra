@@ -64,7 +64,7 @@ Column {
                             anchors { horizontalCenter: parent.horizontalCenter; top: thumb.bottom; topMargin: 6 }
                             text: card.modelData.text
                             color: Theme.text
-                            font { family: Theme.font; pixelSize: 12; weight: card.current ? Font.DemiBold : Font.Normal }
+                            font { family: Theme.font; pixelSize: Theme.px(12); weight: Theme.weight(card.current ? Font.DemiBold : Font.Normal) }
                         }
                     }
                 }

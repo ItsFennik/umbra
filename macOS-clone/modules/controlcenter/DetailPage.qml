@@ -46,7 +46,7 @@ Column {
             anchors { left: backButton.right; leftMargin: 6; verticalCenter: parent.verticalCenter }
             text: root.title
             color: Theme.text
-            font { family: Theme.font; pixelSize: 14; weight: Font.DemiBold }
+            font { family: Theme.font; pixelSize: Theme.px(14); weight: Theme.weight(Font.DemiBold) }
         }
 
         Switch {

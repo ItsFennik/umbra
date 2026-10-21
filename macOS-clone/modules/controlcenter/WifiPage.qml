@@ -35,7 +35,7 @@ DetailPage {
         bottomPadding: 6
         text: NetworkService.wifiAvailable ? "Wi-Fi is off." : "No Wi-Fi hardware available."
         color: Theme.textSecondary
-        font { family: Theme.font; pixelSize: 12 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
     }
 
     Text {
@@ -43,7 +43,7 @@ DetailPage {
         visible: root.error !== ""
         text: root.error
         color: Theme.destructive
-        font { family: Theme.font; pixelSize: 11 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
     }
 
     Repeater {
@@ -86,7 +86,7 @@ DetailPage {
                     verticalAlignment: TextInput.AlignVCenter
                     echoMode: TextInput.Password
                     color: Theme.text
-                    font { family: Theme.font; pixelSize: 12 }
+                    font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
                     onVisibleChanged: if (visible) forceActiveFocus()
                     onAccepted: {
                         entry.modelData.connectWithPsk(text);

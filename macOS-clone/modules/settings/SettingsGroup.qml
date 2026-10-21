@@ -17,7 +17,7 @@ Column {
         leftPadding: 4
         text: root.title
         color: Theme.text
-        font { family: Theme.font; pixelSize: 13; weight: Font.DemiBold }
+        font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(Font.DemiBold) }
     }
 
     Rectangle {
@@ -41,6 +41,6 @@ Column {
         text: root.footer
         wrapMode: Text.WordWrap
         color: Theme.textSecondary
-        font { family: Theme.font; pixelSize: 11 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
     }
 }

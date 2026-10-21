@@ -6,5 +6,5 @@ Text {
     text: Apps.nameFor(Compositor.activeWindow)
     visible: text !== ""
     color: Theme.text
-    font { family: Theme.font; pixelSize: Theme.fontSize; weight: Font.DemiBold }
+    font { family: Theme.font; pixelSize: Theme.fontSize; weight: Theme.weight(Font.DemiBold) }
 }

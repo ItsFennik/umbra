@@ -56,14 +56,14 @@ Item {
             anchors.left: parent.left
             text: root.minLabel
             color: Theme.textSecondary
-            font { family: Theme.font; pixelSize: 10 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(10) }
         }
 
         Text {
             anchors.right: parent.right
             text: root.maxLabel
             color: Theme.textSecondary
-            font { family: Theme.font; pixelSize: 10 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(10) }
         }
     }
 

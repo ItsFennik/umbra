@@ -21,7 +21,7 @@ PanelWindow {
 
     WlrLayershell.namespace: "umbra-notifications"
     WlrLayershell.layer: WlrLayer.Overlay
-    BackgroundEffect.blurRegion: Region { item: column }
+    BackgroundEffect.blurRegion: Region { item: Theme.blur ? column : null }
     mask: Region { item: column }
 
     Column {

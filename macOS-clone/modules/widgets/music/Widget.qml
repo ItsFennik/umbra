@@ -3,13 +3,15 @@ import QtQuick.Effects
 import qs.components
 import qs.config
 import qs.services
+import qs.modules.widgets
 
 // Now Playing: artwork, track, controls, cava spectrum and progress, over a blur of the artwork.
-Item {
+// Without blur (Settings > Performance) or with the artwork background off, it sits on a plain card.
+WidgetBase {
     id: root
 
     readonly property var player: Media.player
-    readonly property bool tinted: backdrop.status === Image.Ready
+    readonly property bool tinted: (options.artworkBackground ?? true) && Theme.blur && backdrop.status === Image.Ready
     readonly property color foreground: tinted ? "white" : Theme.text
     readonly property color secondary: tinted ? Qt.rgba(1, 1, 1, 0.65) : Theme.textSecondary
     readonly property real radius: 22
@@ -46,7 +48,7 @@ Item {
         Image {
             id: backdrop
             anchors.fill: parent
-            source: root.player?.trackArtUrl ?? ""
+            source: (root.options.artworkBackground ?? true) && Theme.blur ? root.player?.trackArtUrl ?? "" : ""
             fillMode: Image.PreserveAspectCrop
             asynchronous: true
             sourceSize { width: 96; height: 96 }
@@ -123,7 +125,7 @@ Item {
                 text: root.player?.trackTitle || root.player?.identity || "Not Playing"
                 elide: Text.ElideRight
                 color: root.foreground
-                font { family: Theme.font; pixelSize: 15; weight: Font.DemiBold }
+                font { family: Theme.font; pixelSize: Theme.px(15); weight: Theme.weight(Font.DemiBold) }
             }
 
             Text {
@@ -132,16 +134,16 @@ Item {
                 text: root.player?.trackArtist ?? ""
                 elide: Text.ElideRight
                 color: root.secondary
-                font { family: Theme.font; pixelSize: 12 }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
             }
 
             Text {
                 width: parent.width
                 visible: text !== ""
-                text: root.player?.trackTitle ? root.player.identity : ""
+                text: root.player?.trackTitle && (root.options.showPlayer ?? true) ? root.player.identity : ""
                 elide: Text.ElideRight
                 color: root.secondary
-                font { family: Theme.font; pixelSize: 10; weight: Font.Medium; capitalization: Font.AllUppercase; letterSpacing: 0.6 }
+                font { family: Theme.font; pixelSize: Theme.px(10); weight: Theme.weight(Font.Medium); capitalization: Font.AllUppercase; letterSpacing: 0.6 }
             }
         }
 
@@ -186,8 +188,9 @@ Item {
         }
 
         Spectrum {
+            visible: root.options.showSpectrum ?? true
             anchors { left: parent.left; right: parent.right; top: art.bottom; topMargin: 10; bottom: progress.top; bottomMargin: 8 }
-            bars: 40
+            bars: Math.max(20, Math.round(width / 9))
             spacing: 3
             color: root.tinted ? Qt.rgba(1, 1, 1, 0.85) : Theme.accent
         }
@@ -212,7 +215,7 @@ Item {
                     height: parent.height
                     radius: 2
                     color: root.foreground
-                    Behavior on width { NumberAnimation { duration: 1000; easing.type: Easing.Linear } }
+                    Behavior on width { NumberAnimation { duration: Theme.ms(1000); easing.type: Easing.Linear } }
                 }
             }
 
@@ -227,14 +230,14 @@ Item {
                 anchors { left: parent.left; bottom: parent.bottom }
                 text: root.time(root.player?.position ?? 0)
                 color: root.secondary
-                font { family: Theme.font; pixelSize: 10; features: { "tnum": 1 } }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(10); features: { "tnum": 1 } }
             }
 
             Text {
                 anchors { right: parent.right; bottom: parent.bottom }
                 text: progress.length > 0 ? "-" + root.time(progress.length - (root.player?.position ?? 0)) : ""
                 color: root.secondary
-                font { family: Theme.font; pixelSize: 10; features: { "tnum": 1 } }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(10); features: { "tnum": 1 } }
             }
         }
     }

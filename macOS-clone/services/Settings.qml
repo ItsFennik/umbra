@@ -5,7 +5,7 @@ import Quickshell.Io
 import qs.config
 
 // Settings changed from the Umbra Settings app, stored in $XDG_STATE_HOME/umbra/settings.json.
-// Config seeds every value until the file exists.
+// Config seeds every value until the file exists. Changes apply live: everything binds to these.
 Singleton {
     id: root
 
@@ -18,24 +18,60 @@ Singleton {
     readonly property bool dockShowIndicators: value("dockShowIndicators")
     readonly property bool dockShowRunning: value("dockShowRunning")
 
-    readonly property var keys: ["showDock", "dockIconSize", "dockMagnification", "dockMagnificationScale", "dockAutoHide", "dockAnimateLaunch", "dockShowIndicators", "dockShowRunning"]
+    readonly property string fontFamily: value("fontFamily")
+    readonly property string fallbackFont: value("fallbackFont")
+    readonly property string emojiFont: value("emojiFont")
+    readonly property int fontSize: value("fontSize")
+    readonly property int fontWeight: value("fontWeight")
+
+    readonly property bool animations: value("animations")
+    readonly property bool blur: value("blur")
+    readonly property bool transparency: value("transparency")
+
+    readonly property var keys: ["showDock", "dockIconSize", "dockMagnification", "dockMagnificationScale", "dockAutoHide", "dockAnimateLaunch", "dockShowIndicators", "dockShowRunning",
+        "fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight", "animations", "blur", "transparency"]
+    readonly property var fontKeys: ["fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight"]
 
     // Whether the Settings window is open, and which page it shows; not persisted.
     property bool windowOpen: false
     property string page: "appearance"
+    // Desktop widget the Widgets page expands, e.g. after "Widget Settings…".
+    property string widgetFocus: ""
 
     function value(key) {
         return file.loaded ? adapter[key] : Config[key];
     }
 
     function set(key, newValue) {
+        setMany({ [key]: newValue });
+    }
+
+    // Applies several values with one write. Unknown keys are ignored.
+    function setMany(values) {
         if (!file.loaded) {
             for (const k of keys)
                 adapter[k] = Config[k];
         }
-        adapter[key] = newValue;
+        for (const k in values) {
+            if (keys.includes(k) && values[k] !== undefined && values[k] !== null)
+                adapter[k] = values[k];
+        }
         file.loaded = true;
         file.writeAdapter();
+    }
+
+    function reset(resetKeys) {
+        const values = {};
+        for (const k of resetKeys ?? keys)
+            values[k] = Config[k];
+        setMany(values);
+    }
+
+    function snapshot() {
+        const values = {};
+        for (const k of keys)
+            values[k] = value(k);
+        return values;
     }
 
     function openPage(name) {
@@ -68,6 +104,14 @@ Singleton {
             property bool dockAnimateLaunch: Config.dockAnimateLaunch
             property bool dockShowIndicators: Config.dockShowIndicators
             property bool dockShowRunning: Config.dockShowRunning
+            property string fontFamily: Config.fontFamily
+            property string fallbackFont: Config.fallbackFont
+            property string emojiFont: Config.emojiFont
+            property int fontSize: Config.fontSize
+            property int fontWeight: Config.fontWeight
+            property bool animations: Config.animations
+            property bool blur: Config.blur
+            property bool transparency: Config.transparency
         }
     }
 }

@@ -35,7 +35,7 @@ MouseArea {
             text: root.text
             elide: Text.ElideRight
             color: root.current ? Theme.onAccent : Theme.text
-            font { family: Theme.font; pixelSize: 13; weight: root.detail !== "" ? Font.DemiBold : Font.Normal }
+            font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(root.detail !== "" ? Font.DemiBold : Font.Normal) }
         }
 
         Text {
@@ -44,7 +44,7 @@ MouseArea {
             text: root.detail
             elide: Text.ElideRight
             color: root.current ? Qt.alpha(Theme.onAccent, 0.75) : Theme.textSecondary
-            font { family: Theme.font; pixelSize: 11 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
         }
     }
 }

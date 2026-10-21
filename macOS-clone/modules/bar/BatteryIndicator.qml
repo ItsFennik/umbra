@@ -10,7 +10,7 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
         text: Math.round(Battery.percentage * 100) + "%"
         color: Theme.text
-        font { family: Theme.font; pixelSize: 12; features: { "tnum": 1 } }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12); features: { "tnum": 1 } }
     }
 
     Item {

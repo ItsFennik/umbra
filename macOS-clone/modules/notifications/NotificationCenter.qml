@@ -23,7 +23,7 @@ Scope {
 
         PopupSurface {
             panelName: "notificationcenter"
-            BackgroundEffect.blurRegion: Region { item: panel }
+            BackgroundEffect.blurRegion: Region { item: Theme.blur ? panel : null }
 
             SystemClock {
                 id: clock
@@ -58,13 +58,13 @@ Scope {
                         Text {
                             text: Qt.formatDate(clock.date, "dddd d MMMM")
                             color: Theme.textSecondary
-                            font { family: Theme.font; pixelSize: 11; weight: Font.Medium }
+                            font { family: Theme.font; pixelSize: Theme.px(11); weight: Theme.weight(Font.Medium) }
                         }
 
                         Text {
                             text: "Notifications"
                             color: Theme.text
-                            font { family: Theme.font; pixelSize: 16; weight: Font.DemiBold }
+                            font { family: Theme.font; pixelSize: Theme.px(16); weight: Theme.weight(Font.DemiBold) }
                         }
                     }
 
@@ -89,7 +89,7 @@ Scope {
                             anchors.centerIn: parent
                             text: "Clear All"
                             color: Theme.text
-                            font { family: Theme.font; pixelSize: 11; weight: Font.Medium }
+                            font { family: Theme.font; pixelSize: Theme.px(11); weight: Theme.weight(Font.Medium) }
                         }
                     }
                 }
@@ -99,7 +99,7 @@ Scope {
                     visible: Notifications.doNotDisturb
                     text: "Focus is on — banners are silenced."
                     color: Theme.textSecondary
-                    font { family: Theme.font; pixelSize: 11 }
+                    font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
                 }
 
                 Column {
@@ -118,7 +118,7 @@ Scope {
                     Text {
                         text: "No Notifications"
                         color: Theme.textSecondary
-                        font { family: Theme.font; pixelSize: 13 }
+                        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
                     }
                 }
 

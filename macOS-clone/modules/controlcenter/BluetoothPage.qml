@@ -17,7 +17,7 @@ DetailPage {
         text: !BluetoothService.enabled ? "Bluetooth is off." : "No paired devices. Pair new devices from your Bluetooth settings."
         wrapMode: Text.Wrap
         color: Theme.textSecondary
-        font { family: Theme.font; pixelSize: 12 }
+        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
     }
 
     Repeater {

@@ -29,7 +29,8 @@ Singleton {
     }
 
     // Ranked application search: name matches outrank generic names, keywords and comments.
-    function search(query, limit) {
+    // boost(entry), when given, adds to the score of entries that already match.
+    function search(query, limit, boost) {
         const q = query.trim().toLowerCase();
         if (q === "")
             return [];
@@ -52,6 +53,7 @@ Singleton {
             .filter(e => !e.noDisplay)
             .map(e => ({ entry: e, score: score(e) }))
             .filter(r => r.score > 0)
+            .map(r => boost ? { entry: r.entry, score: r.score + boost(r.entry) } : r)
             .sort((a, b) => b.score - a.score || a.entry.name.localeCompare(b.entry.name))
             .slice(0, limit)
             .map(r => r.entry);

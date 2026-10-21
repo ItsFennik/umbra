@@ -1,0 +1,17 @@
+{
+    "name": "Workspaces",
+    "description": "Workspaces on this screen; click one to switch to it",
+    "icon": "workspaces",
+    "order": 80,
+    "width": 300,
+    "height": 84,
+    "minWidth": 120,
+    "minHeight": 56,
+    "maxWidth": 1200,
+    "maxHeight": 240,
+    "glass": true,
+    "settings": [
+        { "key": "showWindows", "label": "Show window counts", "type": "bool", "default": true },
+        { "key": "hideEmpty", "label": "Hide empty workspaces", "type": "bool", "default": false }
+    ]
+}

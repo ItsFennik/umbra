@@ -39,7 +39,7 @@ Column {
                             anchors.centerIn: parent
                             text: option.modelData
                             color: option.current ? Theme.onAccent : Theme.text
-                            font { family: Theme.font; pixelSize: 12 }
+                            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
                         }
                     }
                 }

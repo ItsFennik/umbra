@@ -1,0 +1,18 @@
+{
+    "name": "Calendar",
+    "description": "This month, with today highlighted; scroll or use the arrows to change month",
+    "icon": "calendar",
+    "order": 40,
+    "width": 280,
+    "height": 270,
+    "minWidth": 210,
+    "minHeight": 200,
+    "maxWidth": 560,
+    "maxHeight": 540,
+    "glass": true,
+    "settings": [
+        { "key": "firstDay", "label": "Week starts on", "type": "choice", "default": "locale", "options": [{ "value": "locale", "text": "Region" }, { "value": "monday", "text": "Monday" }, { "value": "sunday", "text": "Sunday" }] },
+        { "key": "showOtherMonths", "label": "Show days of other months", "type": "bool", "default": true },
+        { "key": "dimWeekends", "label": "Dim weekends", "type": "bool", "default": false }
+    ]
+}

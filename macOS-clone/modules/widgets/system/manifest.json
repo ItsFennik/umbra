@@ -1,0 +1,18 @@
+{
+    "name": "CPU & Memory",
+    "description": "Processor load and memory use",
+    "icon": "cpu",
+    "order": 70,
+    "width": 260,
+    "height": 150,
+    "minWidth": 180,
+    "minHeight": 100,
+    "maxWidth": 640,
+    "maxHeight": 400,
+    "glass": true,
+    "settings": [
+        { "key": "showGraph", "label": "Show CPU graph", "type": "bool", "default": true },
+        { "key": "showSwap", "label": "Show swap", "type": "bool", "default": false },
+        { "key": "interval", "label": "Update every", "type": "choice", "default": "2000", "options": [{ "value": "1000", "text": "1 s" }, { "value": "2000", "text": "2 s" }, { "value": "5000", "text": "5 s" }] }
+    ]
+}

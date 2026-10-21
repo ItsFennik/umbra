@@ -40,7 +40,7 @@ Scope {
             WlrLayershell.namespace: "umbra-power"
             WlrLayershell.layer: WlrLayer.Overlay
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-            BackgroundEffect.blurRegion: Region { item: panel }
+            BackgroundEffect.blurRegion: Region { item: Theme.blur ? panel : null }
 
             readonly property string action: Session.pending
             readonly property var copy: ({
@@ -149,7 +149,7 @@ Scope {
                             anchors.verticalCenter: parent.verticalCenter
                             text: User.name
                             color: Theme.text
-                            font { family: Theme.font; pixelSize: 13; weight: Font.Bold }
+                            font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(Font.Bold) }
                         }
                     }
 
@@ -205,7 +205,7 @@ Scope {
                                     text: entry.modelData.text
                                     elide: Text.ElideRight
                                     color: entry.highlighted ? Theme.onAccent : Theme.text
-                                    font { family: Theme.font; pixelSize: 13 }
+                                    font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(13) }
                                 }
 
                                 Text {
@@ -213,7 +213,7 @@ Scope {
                                     anchors { right: parent.right; rightMargin: 10; verticalCenter: parent.verticalCenter }
                                     text: entry.modelData.key
                                     color: entry.highlighted ? Theme.onAccent : Theme.textSecondary
-                                    font { family: Theme.font; pixelSize: 12 }
+                                    font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
                                 }
                             }
                         }
@@ -263,7 +263,7 @@ Scope {
                         wrapMode: Text.Wrap
                         horizontalAlignment: Text.AlignHCenter
                         color: Theme.text
-                        font { family: Theme.font; pixelSize: 13; weight: Font.Bold }
+                        font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(Font.Bold) }
                     }
 
                     Text {
@@ -273,7 +273,7 @@ Scope {
                         wrapMode: Text.Wrap
                         horizontalAlignment: Text.AlignHCenter
                         color: Theme.textSecondary
-                        font { family: Theme.font; pixelSize: 11 }
+                        font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
                     }
 
                     Item { width: 1; height: 18 }
@@ -318,7 +318,7 @@ Scope {
                                     anchors.centerIn: parent
                                     text: button.modelData.text
                                     color: button.primary ? Theme.onAccent : Theme.text
-                                    font { family: Theme.font; pixelSize: 13; weight: button.primary ? Font.Medium : Font.Normal }
+                                    font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(button.primary ? Font.Medium : Font.Normal) }
                                 }
                             }
                         }

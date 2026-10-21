@@ -31,6 +31,22 @@ Singleton {
     readonly property bool dockShowIndicators: true
     readonly property bool dockShowRunning: true
 
-    // Preferred UI fonts, first installed one wins.
+    // Preferred UI fonts, first installed one wins, while Umbra Settings leaves the font on Automatic.
     readonly property list<string> fontFamilies: ["SF Pro Text", "Inter", "Geist", "Noto Sans", "Cantarell"]
+    readonly property list<string> emojiFamilies: ["Apple Color Emoji", "Noto Color Emoji", "Twemoji", "JoyPixels", "Segoe UI Emoji"]
+
+    // Defaults for Umbra's own fonts (never the system's). "" means Automatic.
+    readonly property string fontFamily: ""
+    readonly property string fallbackFont: ""
+    readonly property string emojiFont: ""
+    readonly property int fontSize: 13
+    readonly property int fontWeight: 400
+
+    // Defaults for the performance switches; off falls back to cheaper drawing.
+    readonly property bool animations: true
+    readonly property bool blur: true
+    readonly property bool transparency: true
+
+    // Terminal for "> command" in the launcher when $TERMINAL is unset; the first installed one wins.
+    readonly property list<string> terminals: ["foot", "kitty", "alacritty", "wezterm", "ghostty", "konsole", "gnome-terminal", "xterm"]
 }

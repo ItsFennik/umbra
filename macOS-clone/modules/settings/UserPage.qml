@@ -18,14 +18,14 @@ Column {
             anchors.horizontalCenter: parent.horizontalCenter
             text: User.name
             color: Theme.text
-            font { family: Theme.font; pixelSize: 18; weight: Font.Bold }
+            font { family: Theme.font; pixelSize: Theme.px(18); weight: Theme.weight(Font.Bold) }
         }
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text: User.login
             color: Theme.textSecondary
-            font { family: Theme.font; pixelSize: 12 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
         }
     }
 

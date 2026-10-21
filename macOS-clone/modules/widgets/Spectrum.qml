@@ -2,7 +2,7 @@ import QtQuick
 import qs.config
 import qs.services
 
-// Cava bars. Keeps cava running while it exists.
+// Cava bars. Keeps cava running while it is visible.
 Item {
     id: root
 
@@ -17,8 +17,19 @@ Item {
     // Dim bars toward the sides.
     property bool fadeEdges: false
 
-    Component.onCompleted: Cava.acquire()
-    Component.onDestruction: Cava.release()
+    property bool acquired: false
+    function sync() {
+        if (visible === acquired)
+            return;
+        acquired = visible;
+        if (acquired)
+            Cava.acquire();
+        else
+            Cava.release();
+    }
+    onVisibleChanged: sync()
+    Component.onCompleted: sync()
+    Component.onDestruction: if (acquired) Cava.release()
 
     Row {
         anchors.fill: parent
@@ -44,7 +55,7 @@ Item {
                     color: root.color
                     opacity: root.fadeEdges ? 1 - parent.fromCenter * 0.7 : 1
 
-                    Behavior on height { NumberAnimation { duration: 70 } }
+                    Behavior on height { NumberAnimation { duration: Theme.ms(70) } }
                 }
             }
         }

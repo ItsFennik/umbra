@@ -58,7 +58,7 @@ MouseArea {
                 text: (root.entry?.name ?? root.notification?.appName ?? "").toUpperCase()
                 elide: Text.ElideRight
                 color: Theme.textSecondary
-                font { family: Theme.font; pixelSize: 10; weight: Font.DemiBold; letterSpacing: 0.3 }
+                font { family: Theme.font; pixelSize: Theme.px(10); weight: Theme.weight(Font.DemiBold); letterSpacing: 0.3 }
             }
 
             Text {
@@ -66,7 +66,7 @@ MouseArea {
                 anchors { right: parent.right; rightMargin: closeButton.visible ? 24 : 0; verticalCenter: parent.verticalCenter }
                 text: Notifications.age(root.notification, root.now)
                 color: Theme.textSecondary
-                font { family: Theme.font; pixelSize: 11 }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
             }
 
             MouseArea {
@@ -108,7 +108,7 @@ MouseArea {
                     text: root.notification?.summary ?? ""
                     elide: Text.ElideRight
                     color: Theme.text
-                    font { family: Theme.font; pixelSize: 13; weight: Font.DemiBold }
+                    font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(Font.DemiBold) }
                 }
 
                 Text {
@@ -121,7 +121,7 @@ MouseArea {
                     elide: Text.ElideRight
                     color: Theme.text
                     opacity: 0.85
-                    font { family: Theme.font; pixelSize: 12 }
+                    font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
                     onLinkActivated: link => Qt.openUrlExternally(link)
                 }
             }
@@ -169,7 +169,7 @@ MouseArea {
                         text: action.modelData.text
                         elide: Text.ElideRight
                         color: Theme.text
-                        font { family: Theme.font; pixelSize: 12; weight: Font.Medium }
+                        font { family: Theme.font; pixelSize: Theme.px(12); weight: Theme.weight(Font.Medium) }
                     }
                 }
             }

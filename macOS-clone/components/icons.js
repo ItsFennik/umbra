@@ -41,7 +41,29 @@ var paths = {
     "bolt": "M13 2L4 14h7l-1 8 9-12h-7z",
     "power": "M12 2v10 M18.36 6.64a9 9 0 1 1-12.73 0",
     "restart": "M21 12a9 9 0 1 1-2.64-6.36L21 8 M21 3v5h-5",
-    "log-out": "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9"
+    "log-out": "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9",
+    "type": "M4 7V4h16v3 M9 20h6 M12 4v16",
+    "layers": "M12 2l10 5-10 5L2 7z M2 17l10 5 10-5 M2 12l10 5 10-5",
+    "gauge": "M12 14l4-4 M3.34 19a10 10 0 1 1 17.32 0z",
+    "calendar": "M3 4h18v18H3z M16 2v4 M8 2v4 M3 10h18",
+    "clock": "M2 12a10 10 0 1 0 20 0a10 10 0 1 0-20 0 M12 6v6l4 2",
+    "battery": "M2 7h16v10H2z M22 11v2",
+    "cpu": "M5 5h14v14H5z M9 9h6v6H9z M9 1v4 M15 1v4 M9 19v4 M15 19v4 M1 9h4 M1 15h4 M19 9h4 M19 15h4",
+    "activity": "M22 12h-4l-3 9L9 3l-3 9H2",
+    "arrow-up": "M12 19V5 M5 12l7-7 7 7",
+    "arrow-down": "M12 5v14 M19 12l-7 7-7-7",
+    "trash": "M3 6h18 M8 6V4h8v2 M19 6l-1 14H6L5 6",
+    "grip": "M9 6h.01 M15 6h.01 M9 12h.01 M15 12h.01 M9 18h.01 M15 18h.01",
+    "plus": "M12 5v14 M5 12h14",
+    "copy": "M9 9h12v12H9z M5 15H3V3h12v2",
+    "terminal": "M4 17l6-6-6-6 M12 19h8",
+    "history": "M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5 M12 7v5l4 2",
+    "clipboard": "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2 M8 2h8v4H8z",
+    "smile": "M2 12a10 10 0 1 0 20 0a10 10 0 1 0-20 0 M8 14s1.5 2 4 2 4-2 4-2 M9 9h.01 M15 9h.01",
+    "calculator": "M4 2h16v20H4z M8 6h8v4H8z M8 14h.01 M12 14h.01 M16 14h.01 M8 18h.01 M12 18h.01 M16 18h.01",
+    "sliders": "M4 21v-7 M4 10V3 M12 21v-9 M12 8V3 M20 21v-5 M20 12V3 M1 14h6 M9 8h6 M17 16h6",
+    "workspaces": "M3 3h8v8H3z M13 3h8v8h-8z M3 13h8v8H3z M13 13h8v8h-8z",
+    "maximize": "M15 3h6v6 M9 21H3v-6 M21 3l-7 7 M3 21l7-7"
 };
 
 // Icons drawn as solid shapes rather than outlines.

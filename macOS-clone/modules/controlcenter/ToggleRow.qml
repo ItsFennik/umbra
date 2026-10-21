@@ -60,7 +60,7 @@ Item {
                 text: root.title
                 elide: Text.ElideRight
                 color: Theme.text
-                font { family: Theme.font; pixelSize: 13; weight: Font.DemiBold }
+                font { family: Theme.font; pixelSize: Theme.px(13); weight: Theme.weight(Font.DemiBold) }
             }
 
             Text {
@@ -68,7 +68,7 @@ Item {
                 text: root.subtitle
                 elide: Text.ElideRight
                 color: Theme.textSecondary
-                font { family: Theme.font; pixelSize: 11 }
+                font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(11) }
             }
         }
 

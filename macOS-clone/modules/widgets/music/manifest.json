@@ -1,0 +1,18 @@
+{
+    "name": "Now Playing",
+    "description": "Media controls with artwork, progress and a cava spectrum",
+    "icon": "music",
+    "order": 10,
+    "width": 360,
+    "height": 176,
+    "minWidth": 300,
+    "minHeight": 104,
+    "maxWidth": 720,
+    "maxHeight": 300,
+    "glass": true,
+    "settings": [
+        { "key": "showSpectrum", "label": "Show spectrum", "type": "bool", "default": true },
+        { "key": "artworkBackground", "label": "Blurred artwork background", "type": "bool", "default": true },
+        { "key": "showPlayer", "label": "Show player name", "type": "bool", "default": true }
+    ]
+}

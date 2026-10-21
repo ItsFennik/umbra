@@ -40,7 +40,7 @@ Item {
         if (!modelData.entry)
             return;
         modelData.entry.execute();
-        if (Settings.dockAnimateLaunch)
+        if (Settings.dockAnimateLaunch && Theme.animations)
             bounce.restart();
     }
 
@@ -110,8 +110,8 @@ Item {
     // Launch feedback: a single restrained bounce.
     SequentialAnimation {
         id: bounce
-        NumberAnimation { target: lift; property: "y"; to: -12; duration: 180; easing.type: Easing.OutQuad }
-        NumberAnimation { target: lift; property: "y"; to: 0; duration: 260; easing.type: Easing.OutBounce }
+        NumberAnimation { target: lift; property: "y"; to: -12; duration: Theme.ms(180); easing.type: Easing.OutQuad }
+        NumberAnimation { target: lift; property: "y"; to: 0; duration: Theme.ms(260); easing.type: Easing.OutBounce }
     }
 
     MouseArea {
@@ -181,7 +181,7 @@ Item {
             anchors.centerIn: parent
             text: tooltip.removeHint ? "Remove from Dock" : item.label
             color: Theme.text
-            font { family: Theme.font; pixelSize: 12 }
+            font { family: Theme.font; weight: Theme.fontWeight; pixelSize: Theme.px(12) }
         }
     }
 }

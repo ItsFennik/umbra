@@ -42,6 +42,6 @@ MouseArea {
         text: root.title
         elide: Text.ElideRight
         color: Theme.text
-        font { family: Theme.font; pixelSize: 12; weight: Font.DemiBold }
+        font { family: Theme.font; pixelSize: Theme.px(12); weight: Theme.weight(Font.DemiBold) }
     }
 }

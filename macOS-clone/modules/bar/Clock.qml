@@ -10,5 +10,5 @@ Text {
 
     text: Qt.formatDateTime(clock.date, "ddd d MMM") + "   " + Qt.formatDateTime(clock.date, "HH:mm")
     color: Theme.text
-    font { family: Theme.font; pixelSize: Theme.fontSize; weight: Font.Medium; features: { "tnum": 1 } }
+    font { family: Theme.font; pixelSize: Theme.fontSize; weight: Theme.weight(Font.Medium); features: { "tnum": 1 } }
 }
