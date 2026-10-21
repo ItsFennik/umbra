@@ -20,6 +20,8 @@ Singleton {
     readonly property bool matugenColors: false
     // matugen --type: scheme-tonal-spot, scheme-content, scheme-vibrant, scheme-expressive, ...
     readonly property string matugenScheme: "scheme-tonal-spot"
+    // Default for "Wallpaper Colors in Apps": writes the matugen palette into ~/.config/gtk-{3,4}.0/gtk.css.
+    readonly property bool gtkMatugen: false
 
     // Defaults for the Umbra Settings app; changes made there are saved separately.
     readonly property bool showDock: true

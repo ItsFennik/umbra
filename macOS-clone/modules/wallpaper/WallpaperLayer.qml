@@ -76,6 +76,8 @@ Scope {
                 cache: false
                 sourceSize: Qt.size(window.screen.width, window.screen.height)
                 opacity: window.front === image ? 1 : 0
+                // Drop the outgoing wallpaper once it has faded out rather than keep it decoded.
+                onOpacityChanged: if (opacity === 0 && window.front !== image) source = ""
                 onStatusChanged: {
                     if (status === Image.Ready && source.toString() === Qt.resolvedUrl(Wallpaper.path).toString())
                         window.front = image;

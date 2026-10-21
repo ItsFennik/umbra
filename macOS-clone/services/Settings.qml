@@ -28,8 +28,10 @@ Singleton {
     readonly property bool blur: value("blur")
     readonly property bool transparency: value("transparency")
 
+    readonly property bool gtkMatugen: value("gtkMatugen")
+
     readonly property var keys: ["showDock", "dockIconSize", "dockMagnification", "dockMagnificationScale", "dockAutoHide", "dockAnimateLaunch", "dockShowIndicators", "dockShowRunning",
-        "fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight", "animations", "blur", "transparency"]
+        "fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight", "animations", "blur", "transparency", "gtkMatugen"]
     readonly property var fontKeys: ["fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight"]
 
     // Whether the Settings window is open, and which page it shows; not persisted.
@@ -112,6 +114,7 @@ Singleton {
             property bool animations: Config.animations
             property bool blur: Config.blur
             property bool transparency: Config.transparency
+            property bool gtkMatugen: Config.gtkMatugen
         }
     }
 }

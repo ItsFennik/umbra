@@ -59,6 +59,7 @@ Scope {
                 { id: "widgets", text: "Widgets", icon: "grid", tint: "#30b0c7", keywords: "desktop clock calendar battery network speed cpu memory ram music media visualizer workspaces layout" },
                 { id: "profiles", text: "Profiles", icon: "layers", tint: "#34c759", keywords: "profile save switch theme layout configuration preset" },
                 { id: "performance", text: "Performance", icon: "gauge", tint: "#ff453a", keywords: "animations motion blur transparency speed battery reduce" },
+                { id: "themes", text: "Themes", icon: "brush", tint: "#ff375f", keywords: "gtk theme adwaita adw-gtk3 apps matugen wallpaper colors" },
                 { id: "icons", text: "Icons", icon: "shapes", tint: "#ff9f0a", keywords: "icon theme whitesur" },
                 { id: "cursors", text: "Cursors", icon: "cursor", tint: "#bf5af2", keywords: "pointer mouse size" }
             ]
@@ -208,6 +209,7 @@ Scope {
                             widgets: "WidgetsPage.qml",
                             profiles: "ProfilesPage.qml",
                             performance: "PerformancePage.qml",
+                            themes: "ThemesPage.qml",
                             icons: "IconsPage.qml",
                             cursors: "CursorsPage.qml"
                         })[Settings.page] ?? "AppearancePage.qml"

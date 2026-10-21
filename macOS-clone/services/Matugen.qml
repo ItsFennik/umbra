@@ -15,6 +15,8 @@ Singleton {
     // Scheme for the current mode, keyed by matugen role (primary, surface, on_surface, ...).
     readonly property var colors: Appearance.dark ? scheme.dark : scheme.light
     readonly property bool active: enabled && available && colors.primary !== undefined
+    // The palette is also generated for GTK apps (GtkTheme) while Umbra's own colors stay off.
+    readonly property bool wanted: enabled || Settings.gtkMatugen
 
     property var scheme: ({ dark: {}, light: {} })
 
@@ -25,7 +27,7 @@ Singleton {
     }
 
     function generate() {
-        if (!enabled || !available)
+        if (!wanted || !available)
             return;
         generator.running = false;
         generator.command = ["matugen", "image", Wallpaper.path, "--dry-run", "--json", "hex", "--source-color-index", "0", "--type", Config.matugenScheme, "-q"];
@@ -48,7 +50,7 @@ Singleton {
         scheme = { dark, light };
     }
 
-    onEnabledChanged: generate()
+    onWantedChanged: generate()
     onAvailableChanged: generate()
 
     Connections {

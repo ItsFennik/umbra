@@ -6,49 +6,52 @@ import qs.config
 import qs.services
 
 // Transient banners in the top-right corner. They leave the screen after a
-// timeout but stay in Notification Center until dismissed.
-PanelWindow {
-    id: window
+// timeout but stay in Notification Center until dismissed. The window only exists while showing.
+LazyLoader {
+    active: Notifications.banners.length > 0 && Panels.current !== "notifications"
 
-    screen: Compositor.focusedScreen ?? Quickshell.screens[0]
-    visible: Notifications.banners.length > 0 && Panels.current !== "notifications"
+    PanelWindow {
+        id: window
 
-    anchors { top: true; right: true }
-    margins { top: Theme.panelGap; right: Theme.panelGap }
-    implicitWidth: 360
-    implicitHeight: Math.max(1, column.implicitHeight)
-    color: "transparent"
+        screen: Compositor.focusedScreen ?? Quickshell.screens[0]
 
-    WlrLayershell.namespace: "umbra-notifications"
-    WlrLayershell.layer: WlrLayer.Overlay
-    BackgroundEffect.blurRegion: Region { item: Theme.blur ? column : null }
-    mask: Region { item: column }
+        anchors { top: true; right: true }
+        margins { top: Theme.panelGap; right: Theme.panelGap }
+        implicitWidth: 360
+        implicitHeight: Math.max(1, column.implicitHeight)
+        color: "transparent"
 
-    Column {
-        id: column
-        width: parent.width
-        spacing: 8
+        WlrLayershell.namespace: "umbra-notifications"
+        WlrLayershell.layer: WlrLayer.Overlay
+        BackgroundEffect.blurRegion: Region { item: Theme.blur ? column : null }
+        mask: Region { item: column }
 
-        Repeater {
-            model: ScriptModel { values: Notifications.banners.slice(0, 4) }
+        Column {
+            id: column
+            width: parent.width
+            spacing: 8
 
-            delegate: NotificationCard {
-                id: card
-                required property var modelData
+            Repeater {
+                model: ScriptModel { values: Notifications.banners.slice(0, 4) }
 
-                notification: modelData
-                width: column.width
-                background: Theme.popupBackground
+                delegate: NotificationCard {
+                    id: card
+                    required property var modelData
 
-                // Slide in from the right.
-                transform: Translate { id: slide; x: 380 }
-                Component.onCompleted: enter.start()
-                NumberAnimation { id: enter; target: slide; property: "x"; to: 0; duration: Theme.durationMedium; easing.type: Theme.easing }
+                    notification: modelData
+                    width: column.width
+                    background: Theme.popupBackground
 
-                Timer {
-                    interval: card.notification.expireTimeout > 0 ? card.notification.expireTimeout : 5000
-                    running: card.notification.urgency !== NotificationUrgency.Critical && !card.containsMouse
-                    onTriggered: Notifications.hideBanner(card.notification)
+                    // Slide in from the right.
+                    transform: Translate { id: slide; x: 380 }
+                    Component.onCompleted: enter.start()
+                    NumberAnimation { id: enter; target: slide; property: "x"; to: 0; duration: Theme.durationMedium; easing.type: Theme.easing }
+
+                    Timer {
+                        interval: card.notification.expireTimeout > 0 ? card.notification.expireTimeout : 5000
+                        running: card.notification.urgency !== NotificationUrgency.Critical && !card.containsMouse
+                        onTriggered: Notifications.hideBanner(card.notification)
+                    }
                 }
             }
         }

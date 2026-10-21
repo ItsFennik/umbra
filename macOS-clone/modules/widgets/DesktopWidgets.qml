@@ -24,7 +24,8 @@ Scope {
     }
 
     Variants {
-        model: Quickshell.screens
+        // A layer only on screens that hold widgets; each one is a full-screen surface.
+        model: Quickshell.screens.filter(s => Widgets.on(s).length > 0)
 
         PanelWindow {
             id: window

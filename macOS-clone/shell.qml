@@ -1,5 +1,9 @@
 //@ pragma UseQApplication
 //@ pragma IconTheme WhiteSur-dark
+// Memory: load only NVIDIA's EGL vendor (glvnd otherwise also maps Mesa and LLVM), and render
+// every window on the GUI thread instead of one render thread and GL context per window.
+//@ pragma DefaultEnv __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json
+//@ pragma DefaultEnv QSG_RENDER_LOOP=basic
 import QtQuick
 import Quickshell
 import qs.services
