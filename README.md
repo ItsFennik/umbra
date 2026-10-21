@@ -117,6 +117,20 @@ View logs if something goes wrong:
 
 ```bash
 journalctl --user -u umbra.service -b
+
+## Keybindings
+
+Umbra exposes shell actions that can be bound to keyboard shortcuts through your Wayland compositor.
+
+| Action | Suggested shortcut |
+|---|---|
+| Open Spotlight launcher | `Super + Space` |
+| Toggle application dock | `Super + D` |
+| Open notification center | `Super + N` |
+| Open quick settings | `Super + A` |
+| Close active window | `Super + Q` |
+
+These shortcuts are suggestions. They require the corresponding shell components and compositor bindings to be implemented.
 ```
 
 If your compositor does not activate `graphical-session.target`, you may need to start the service through your compositor's autostart configuration instead.
