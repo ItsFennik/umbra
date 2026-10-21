@@ -10,6 +10,7 @@ Most of this project is vibe-coded, with roughly 80% of the code written with AI
 Development happens in my own time, with no promises of regular updates, long-term support, or stability. I'm building this because I want to, and I'll take it wherever I feel like going.
 
 Realistically, Umbra is something I intend to use for as long as I'm on Linux, so despite the experimental nature of the project, it's something I plan to keep developing for my own use.
+
 If you like macOS-inspired Linux desktops, feel free to stick around, try it out, or contribute. 
 
 If you have an issue with AI-assisted development, that's fine, but this is my personal project and I'm comfortable with how I'm building it. I'm not here to debate it or convince anyone otherwise.
