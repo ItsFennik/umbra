@@ -27,10 +27,10 @@ Singleton {
     }
 
     function generate() {
-        if (!wanted || !available)
+        if (!wanted || !available || Wallpaper.colorSource === "")
             return;
         generator.running = false;
-        generator.command = ["matugen", "image", Wallpaper.path, "--dry-run", "--json", "hex", "--source-color-index", "0", "--type", Config.matugenScheme, "-q"];
+        generator.command = ["matugen", "image", Wallpaper.colorSource, "--dry-run", "--json", "hex", "--source-color-index", "0", "--type", Config.matugenScheme, "-q"];
         generator.running = true;
     }
 
@@ -55,7 +55,7 @@ Singleton {
 
     Connections {
         target: Wallpaper
-        function onPathChanged() { root.generate(); }
+        function onColorSourceChanged() { root.generate(); }
     }
 
     Process {

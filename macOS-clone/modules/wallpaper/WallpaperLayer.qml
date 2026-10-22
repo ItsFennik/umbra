@@ -9,6 +9,7 @@ import qs.services
 //   qs -p <umbra dir> ipc call wallpaper set /path/to/image.jpg
 //   qs -p <umbra dir> ipc call wallpaper get
 //   qs -p <umbra dir> ipc call wallpaper pick
+//   qs -p <umbra dir> ipc call wallpaper live /path/to/video.mp4   (mpvpaper; liveOff to stop)
 //   qs -p <umbra dir> ipc call colors toggle    (matugen wallpaper colors)
 Scope {
     IpcHandler {
@@ -17,6 +18,9 @@ Scope {
         function set(path: string): void { Wallpaper.set(path); }
         function get(): string { return Wallpaper.path; }
         function pick(): void { Panels.toggle("wallpaper"); }
+        function live(path: string): void { Wallpaper.setLive(path); }
+        function liveOff(): void { Wallpaper.clearLive(); }
+        function liveFolder(path: string): void { Wallpaper.setLiveDirectory(path); }
     }
 
     IpcHandler {
@@ -38,7 +42,10 @@ Scope {
 
             anchors { top: true; bottom: true; left: true; right: true }
             exclusionMode: ExclusionMode.Ignore
-            color: "black"
+            // Transparent while mpvpaper draws a live wallpaper, so the video shows whichever
+            // background surface ends up on top; the window stays for desktop right-clicks.
+            readonly property bool live: Wallpaper.live !== "" && Wallpaper.mpvpaperAvailable
+            color: live ? "transparent" : "black"
 
             WlrLayershell.namespace: "umbra-wallpaper"
             WlrLayershell.layer: WlrLayer.Background
@@ -61,6 +68,7 @@ Scope {
                     ...Widgets.types.map(t => ({ text: "Add " + t.text + " Widget", action: () => Widgets.add(t.id, window.screen, mouse.x, mouse.y) })),
                     { separator: true },
                     { text: "Change Wallpaper…", action: () => Panels.open("wallpaper", window.screen) },
+                    { text: "Live Wallpapers…", action: () => Settings.openPage("live") },
                     { text: "Umbra Settings…", action: () => Settings.windowOpen = true }
                 ], window.screen, mouse.x, mouse.y)
             }
@@ -71,6 +79,7 @@ Scope {
             component WallpaperImage: Image {
                 id: image
                 anchors.fill: parent
+                visible: !window.live
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
                 cache: false

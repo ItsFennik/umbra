@@ -15,6 +15,8 @@ Singleton {
     // Initial wallpaper and the folder the picker browses; changes made in Umbra are saved separately.
     readonly property string wallpaper: Quickshell.env("HOME") + "/Documents/kemuri-hokkaido-14.png"
     readonly property string wallpaperDirectory: Quickshell.env("HOME") + "/Pictures/Wallpapers"
+    // Folder the Live Wallpaper page browses for videos (played with mpvpaper).
+    readonly property string liveWallpaperDirectory: Quickshell.env("HOME") + "/Videos/Wallpapers"
 
     // Default for "Match Wallpaper Colors" (needs matugen); toggling it in Umbra is saved separately.
     readonly property bool matugenColors: false

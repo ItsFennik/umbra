@@ -32,6 +32,7 @@ Singleton {
             dark: Appearance.dark,
             matugen: Matugen.enabled,
             wallpaper: Wallpaper.path,
+            liveWallpaper: Wallpaper.live,
             widgets: Widgets.list,
             pins: Array.from(Pins.pinned)
         };
@@ -62,6 +63,14 @@ Singleton {
             dark: () => { if (typeof p.dark === "boolean" && Appearance.detected && p.dark !== Appearance.dark) Appearance.setDark(p.dark); },
             matugen: () => { if (typeof p.matugen === "boolean" && p.matugen !== Matugen.enabled) Matugen.setEnabled(p.matugen); },
             wallpaper: () => { if (typeof p.wallpaper === "string" && p.wallpaper !== "" && p.wallpaper !== Wallpaper.path) Wallpaper.set(p.wallpaper); },
+            liveWallpaper: () => {
+                if (typeof p.liveWallpaper !== "string" || p.liveWallpaper === Wallpaper.live)
+                    return;
+                if (p.liveWallpaper === "")
+                    Wallpaper.clearLive();
+                else
+                    Wallpaper.setLive(p.liveWallpaper);
+            },
             widgets: () => { if (p.widgets) Widgets.restore(p.widgets); },
             pins: () => { if (p.pins) Pins.save(Array.from(p.pins).filter(k => typeof k === "string")); }
         };
