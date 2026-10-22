@@ -2,7 +2,7 @@
 
 A macOS-inspired Wayland desktop shell built with Quickshell and QML.
 
-Umbra is a personal project exploring macOS-inspired UI design on Linux. It's experimental, mostly vibe-coded (roughly 80% AI-assisted), and not production-ready.
+Umbra is a personal project exploring macOS-inspired UI design on Linux. It's experimental, mostly vibe-coded (roughly 80% AI-assisted) although reviewed, and not production-ready.
 
 I develop Umbra in my own time, with no guarantees of stability, support, or regular updates. It's a project I intend to keep developing for my own use.
 
