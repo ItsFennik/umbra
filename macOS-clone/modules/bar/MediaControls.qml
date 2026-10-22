@@ -3,13 +3,13 @@ import qs.components
 import qs.config
 import qs.services
 
-// Optional previous / play-pause / next buttons for the menu bar (Settings > Desktop & Dock).
+// Previous / play-pause / next buttons for the menu bar (off by default; add them in Settings > Menu Bar).
 Row {
     id: root
 
     readonly property var player: Media.player
 
-    visible: Settings.barMediaControls && player !== null
+    visible: player !== null
 
     Repeater {
         model: [

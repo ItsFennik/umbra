@@ -61,7 +61,7 @@ hl.bind("SUPER + C",   hl.dsp.exec_cmd(umbra .. "controlcenter toggle"))
 
 Each target also has `open` and `close`; `notifications` has `clear`.
 `settings toggle` opens Umbra Settings (also in the logo menu and Control Center); `settings page <name>`
-opens a page: `user`, `appearance`, `fonts`, `wallpaper`, `live`, `dock`, `widgets`, `profiles`, `performance`, `themes`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
+opens a page: `user`, `appearance`, `fonts`, `wallpaper`, `live`, `menubar`, `dock`, `widgets`, `profiles`, `performance`, `themes`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
 `power toggle` opens the power menu (arrow keys and Enter, or the hinted letter: L, S, R, U, O); `power restart`, `shutdown` and `logout` ask first and
 count down from 60 seconds, `power sleep` and `lock` act at once.
 `media toggle` opens the Now Playing popout; `media playPause`, `next` and `previous` control the current player.
@@ -76,10 +76,11 @@ without a separate locker.
 
 ## Menu bar and Now Playing
 
-Settings > Desktop & Dock sets the menu bar's height and background opacity. While a player is open
-the bar shows its track, and it stays there while paused; its size, text width and text (title and
-artist, title, or artwork only) are set there too, and separate previous / play-pause / next bar
-buttons can be turned on. Click the track for the Now Playing popout, centred under it: artwork,
+Settings > Menu Bar arranges the bar by drag and drop: drag items between the Left, Center and
+Right zones, or into Available to hide them (Playback Controls start there). The same page sets the
+bar's height and background opacity. While a player is open the bar shows its track, and it stays
+there while paused; its size, text width and text (title and artist, title, or artwork only) are
+set there too. Click the track for the Now Playing popout, centred under it: artwork,
 album, seekable progress, cava spectrum, player volume and a switcher when several players are
 open. Scroll over the track to skip.
 

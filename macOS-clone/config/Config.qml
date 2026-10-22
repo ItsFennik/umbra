@@ -34,18 +34,20 @@ Singleton {
     readonly property bool dockAnimateLaunch: true
     readonly property bool dockShowIndicators: true
     readonly property bool dockShowRunning: true
-    // Menu bar height in px (raised if the font needs more), background opacity (0 clear to 1 solid),
-    // and whether the current track shows in the menu bar.
+    // Menu bar height in px (raised if the font needs more) and background opacity (0 clear to 1 solid).
     readonly property int barHeight: 28
     readonly property real barOpacity: 0.64
-    readonly property bool barShowMedia: true
+    // Menu bar items per zone, by id from config/BarItems.qml; ones left out are hidden.
+    readonly property var barLayout: ({
+        left: ["logo", "activeApp", "workspaces"],
+        center: [],
+        right: ["nowPlaying", "tray", "battery", "network", "volume", "controlCenter", "clock", "power"]
+    })
     // Menu bar track: text size in px (artwork follows), widest the text may get in px before it is
-    // cut off, what it shows ("title", "full" for title and artist, "none" for artwork only), and
-    // whether separate previous / play-pause / next buttons sit next to it.
+    // cut off, and what it shows ("title", "full" for title and artist, "none" for artwork only).
     readonly property int barMediaSize: 13
     readonly property int barMediaWidth: 220
     readonly property string barMediaText: "full"
-    readonly property bool barMediaControls: false
 
     // Preferred UI fonts, first installed one wins, while Umbra Settings leaves the font on Automatic.
     readonly property list<string> fontFamilies: ["SF Pro Text", "Inter", "Geist", "Noto Sans", "Cantarell"]

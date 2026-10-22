@@ -4,7 +4,7 @@ import qs.config
 import qs.services
 
 // Current track in the menu bar: cover art and title. Clicking opens the Now Playing popout,
-// scrolling skips tracks. Stays while paused. Size, text width and text are set in Settings.
+// scrolling skips tracks. Stays while paused. Size, text width and text are set in Settings > Menu Bar.
 BarButton {
     id: root
 
@@ -12,7 +12,7 @@ BarButton {
     readonly property var player: Media.player
     readonly property int textSize: Math.max(9, Math.min(20, Settings.barMediaSize))
 
-    visible: Settings.barShowMedia && player !== null
+    visible: player !== null
     active: Panels.current === "media"
     onClicked: Panels.toggle("media", root.screen, root.mapToItem(null, root.width / 2, 0).x)
     onWheel: event => {

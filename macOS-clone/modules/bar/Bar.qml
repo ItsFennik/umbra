@@ -36,13 +36,45 @@ PanelWindow {
         }
     }
 
-    Row {
+    // Items come from Settings > Menu Bar (BarItems.layout), each zone built from the parts below.
+    readonly property var parts: ({
+        logo: logoPart,
+        activeApp: activeAppPart,
+        workspaces: workspacesPart,
+        nowPlaying: nowPlayingPart,
+        mediaControls: mediaControlsPart,
+        tray: trayPart,
+        battery: batteryPart,
+        network: networkPart,
+        volume: volumePart,
+        controlCenter: controlCenterPart,
+        clock: clockPart,
+        power: powerPart
+    })
+
+    BarZone {
         anchors { left: parent.left; leftMargin: 7; verticalCenter: parent.verticalCenter }
-        spacing: 16
+        zone: "left"
+        parts: bar.parts
+    }
+
+    BarZone {
+        anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
+        zone: "center"
+        parts: bar.parts
+    }
+
+    BarZone {
+        anchors { right: parent.right; rightMargin: 8; verticalCenter: parent.verticalCenter }
+        zone: "right"
+        parts: bar.parts
+    }
+
+    Component {
+        id: logoPart
 
         BarButton {
             id: logo
-            anchors.verticalCenter: parent.verticalCenter
             // Only the logo opens plain item menus from the bar.
             active: Panels.current === "menu" && ContextMenu.handle === null && ContextMenu.edge === "top"
             onClicked: active ? Panels.close() : ContextMenu.open([
@@ -60,70 +92,101 @@ PanelWindow {
             ], bar.screen, logo.mapToItem(null, 0, 0).x)
             Logo {}
         }
+    }
 
-        ActiveApp { anchors.verticalCenter: parent.verticalCenter }
-        Workspaces {
-            anchors.verticalCenter: parent.verticalCenter
-            screen: bar.screen
+    // Text items get the same side padding as buttons.
+    Component {
+        id: activeAppPart
+
+        Item {
+            visible: app.visible
+            implicitWidth: app.implicitWidth + 14
+            implicitHeight: app.implicitHeight
+            ActiveApp { id: app; anchors.centerIn: parent }
         }
     }
 
-    Row {
-        anchors { right: parent.right; rightMargin: 8; verticalCenter: parent.verticalCenter }
-        spacing: 2
+    Component {
+        id: workspacesPart
 
-        NowPlaying {
-            anchors.verticalCenter: parent.verticalCenter
-            screen: bar.screen
+        Item {
+            visible: spaces.visible
+            implicitWidth: spaces.implicitWidth + 14
+            implicitHeight: spaces.implicitHeight
+            Workspaces { id: spaces; anchors.centerIn: parent; screen: bar.screen }
         }
+    }
 
-        MediaControls {
-            anchors.verticalCenter: parent.verticalCenter
-        }
+    Component {
+        id: nowPlayingPart
+        NowPlaying { screen: bar.screen }
+    }
 
-        Tray {
-            anchors.verticalCenter: parent.verticalCenter
-            window: bar
-        }
+    Component {
+        id: mediaControlsPart
+        MediaControls {}
+    }
+
+    Component {
+        id: trayPart
+        Tray { window: bar }
+    }
+
+    Component {
+        id: batteryPart
 
         BarButton {
-            anchors.verticalCenter: parent.verticalCenter
             visible: Battery.available
             onClicked: Panels.toggle("controlcenter", bar.screen)
             BatteryIndicator {}
         }
+    }
+
+    Component {
+        id: networkPart
 
         BarButton {
-            anchors.verticalCenter: parent.verticalCenter
             visible: NetworkService.available
             onClicked: Panels.toggle("controlcenter", bar.screen)
             Icon { name: NetworkService.icon; size: 15 }
         }
+    }
+
+    Component {
+        id: volumePart
 
         BarButton {
-            anchors.verticalCenter: parent.verticalCenter
             visible: Audio.available
             onClicked: Panels.toggle("controlcenter", bar.screen)
             onWheel: event => Audio.setVolume(Audio.volume + (event.angleDelta.y > 0 ? 0.05 : -0.05))
             Icon { name: Audio.icon; size: 15 }
         }
+    }
+
+    Component {
+        id: controlCenterPart
 
         BarButton {
-            anchors.verticalCenter: parent.verticalCenter
             active: Panels.current === "controlcenter"
             onClicked: Panels.toggle("controlcenter", bar.screen)
             Icon { name: "toggles"; size: 15 }
         }
+    }
+
+    Component {
+        id: clockPart
 
         BarButton {
-            anchors.verticalCenter: parent.verticalCenter
             active: Panels.current === "notifications"
             onClicked: Panels.toggle("notifications", bar.screen)
             Clock {}
         }
+    }
+
+    Component {
+        id: powerPart
 
         BarButton {
-            anchors.verticalCenter: parent.verticalCenter
             active: Panels.current === "power"
             onClicked: active ? Panels.close() : Session.request("", bar.screen)
             Icon { name: "power"; size: 15 }
