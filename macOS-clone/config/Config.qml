@@ -39,6 +39,13 @@ Singleton {
     readonly property int barHeight: 28
     readonly property real barOpacity: 0.64
     readonly property bool barShowMedia: true
+    // Menu bar track: text size in px (artwork follows), widest the text may get in px before it is
+    // cut off, what it shows ("title", "full" for title and artist, "none" for artwork only), and
+    // whether separate previous / play-pause / next buttons sit next to it.
+    readonly property int barMediaSize: 13
+    readonly property int barMediaWidth: 220
+    readonly property string barMediaText: "full"
+    readonly property bool barMediaControls: false
 
     // Preferred UI fonts, first installed one wins, while Umbra Settings leaves the font on Automatic.
     readonly property list<string> fontFamilies: ["SF Pro Text", "Inter", "Geist", "Noto Sans", "Cantarell"]

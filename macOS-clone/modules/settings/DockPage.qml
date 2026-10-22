@@ -39,13 +39,71 @@ Column {
             }
         }
 
+    }
+
+    SettingsGroup {
+        title: "Now Playing in Menu Bar"
+        footer: "Click the track in the menu bar for the Now Playing popout."
+
         SettingsRow {
             title: "Show Now Playing"
-            subtitle: "Current track with playback controls"
+            subtitle: "Current track; stays while paused"
 
             Switch {
                 checked: Settings.barShowMedia
                 onToggled: on => Settings.set("barShowMedia", on)
+            }
+        }
+
+        SettingsRow {
+            title: "Text"
+            enabled: Settings.barShowMedia
+
+            Segmented {
+                options: [{ value: "full", text: "Title & Artist" }, { value: "title", text: "Title" }, { value: "none", text: "Artwork Only" }]
+                value: Settings.barMediaText
+                onPicked: v => Settings.set("barMediaText", v)
+            }
+        }
+
+        SettingsRow {
+            title: "Size"
+            enabled: Settings.barShowMedia
+
+            SettingsSlider {
+                from: 9
+                to: 20
+                stepSize: 1
+                minLabel: "Small"
+                maxLabel: "Large"
+                value: Settings.barMediaSize
+                onMoved: v => Settings.set("barMediaSize", Math.round(v))
+            }
+        }
+
+        SettingsRow {
+            title: "Text Width"
+            subtitle: "Longer titles are cut off with …"
+            enabled: Settings.barShowMedia && Settings.barMediaText !== "none"
+
+            SettingsSlider {
+                from: 60
+                to: 500
+                stepSize: 10
+                minLabel: "Short"
+                maxLabel: "Long"
+                value: Settings.barMediaWidth
+                onMoved: v => Settings.set("barMediaWidth", Math.round(v))
+            }
+        }
+
+        SettingsRow {
+            title: "Playback Controls"
+            subtitle: "Previous, play/pause and next buttons in the menu bar"
+
+            Switch {
+                checked: Settings.barMediaControls
+                onToggled: on => Settings.set("barMediaControls", on)
             }
         }
     }

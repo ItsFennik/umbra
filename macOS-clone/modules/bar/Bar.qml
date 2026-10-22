@@ -77,6 +77,10 @@ PanelWindow {
             screen: bar.screen
         }
 
+        MediaControls {
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
         Tray {
             anchors.verticalCenter: parent.verticalCenter
             window: bar

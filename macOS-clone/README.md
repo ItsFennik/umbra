@@ -77,9 +77,11 @@ without a separate locker.
 ## Menu bar and Now Playing
 
 Settings > Desktop & Dock sets the menu bar's height and background opacity. While a player is open
-the bar shows its track with previous / play-pause / next; it stays there while paused. Click the
-track for the Now Playing popout, centred under it: artwork, album, seekable progress, cava
-spectrum, player volume and a switcher when several players are open. Scroll over the track to skip.
+the bar shows its track, and it stays there while paused; its size, text width and text (title and
+artist, title, or artwork only) are set there too, and separate previous / play-pause / next bar
+buttons can be turned on. Click the track for the Now Playing popout, centred under it: artwork,
+album, seekable progress, cava spectrum, player volume and a switcher when several players are
+open. Scroll over the track to skip.
 
 ## Wallpapers
 

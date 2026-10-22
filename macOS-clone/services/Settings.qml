@@ -21,6 +21,10 @@ Singleton {
     readonly property int barHeight: value("barHeight")
     readonly property real barOpacity: value("barOpacity")
     readonly property bool barShowMedia: value("barShowMedia")
+    readonly property int barMediaSize: value("barMediaSize")
+    readonly property int barMediaWidth: value("barMediaWidth")
+    readonly property string barMediaText: value("barMediaText")
+    readonly property bool barMediaControls: value("barMediaControls")
 
     readonly property string fontFamily: value("fontFamily")
     readonly property string fallbackFont: value("fallbackFont")
@@ -35,7 +39,7 @@ Singleton {
     readonly property bool gtkMatugen: value("gtkMatugen")
 
     readonly property var keys: ["showDock", "dockIconSize", "dockMagnification", "dockMagnificationScale", "dockAutoHide", "dockAnimateLaunch", "dockShowIndicators", "dockShowRunning",
-        "barHeight", "barOpacity", "barShowMedia",
+        "barHeight", "barOpacity", "barShowMedia", "barMediaSize", "barMediaWidth", "barMediaText", "barMediaControls",
         "fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight", "animations", "blur", "transparency", "gtkMatugen"]
     readonly property var fontKeys: ["fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight"]
 
@@ -114,6 +118,10 @@ Singleton {
             property int barHeight: Config.barHeight
             property real barOpacity: Config.barOpacity
             property bool barShowMedia: Config.barShowMedia
+            property int barMediaSize: Config.barMediaSize
+            property int barMediaWidth: Config.barMediaWidth
+            property string barMediaText: Config.barMediaText
+            property bool barMediaControls: Config.barMediaControls
             property string fontFamily: Config.fontFamily
             property string fallbackFont: Config.fallbackFont
             property string emojiFont: Config.emojiFont
