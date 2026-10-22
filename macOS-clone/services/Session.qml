@@ -11,6 +11,8 @@ Singleton {
     id: root
 
     property string pending: ""
+    // Shows the lock screen (modules/lock) until PAM accepts the password.
+    property bool locked: false
 
     function request(action, screen) {
         pending = action ?? "";
@@ -23,7 +25,7 @@ Singleton {
         case "sleep": exec(["systemctl", "suspend"]); break;
         case "restart": exec(["systemctl", "reboot"]); break;
         case "shutdown": exec(["systemctl", "poweroff"]); break;
-        case "lock": exec(["loginctl", "lock-session"]); break;
+        case "lock": locked = true; break;
         case "logout":
             if (Compositor.adapter?.logout)
                 Compositor.adapter.logout();

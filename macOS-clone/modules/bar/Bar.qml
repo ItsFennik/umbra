@@ -72,6 +72,11 @@ PanelWindow {
         anchors { right: parent.right; rightMargin: 8; verticalCenter: parent.verticalCenter }
         spacing: 2
 
+        NowPlaying {
+            anchors.verticalCenter: parent.verticalCenter
+            screen: bar.screen
+        }
+
         Tray {
             anchors.verticalCenter: parent.verticalCenter
             window: bar

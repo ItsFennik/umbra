@@ -11,6 +11,8 @@ import qs.modules.bar
 import qs.modules.controlcenter
 import qs.modules.dock
 import qs.modules.launcher
+import qs.modules.lock
+import qs.modules.media
 import qs.modules.menu
 import qs.modules.notifications
 import qs.modules.overview
@@ -36,10 +38,12 @@ ShellRoot {
 
     Launcher {}
     ControlCenter {}
+    MediaPanel {}
     NotificationCenter {}
     Banners {}
     Overview {}
     ContextMenuLayer {}
     SettingsApp {}
     PowerDialog {}
+    LockScreen {}
 }

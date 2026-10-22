@@ -7,6 +7,50 @@ Column {
     spacing: 20
 
     SettingsGroup {
+        title: "Menu Bar"
+
+        SettingsRow {
+            title: "Size"
+
+            SettingsSlider {
+                from: 24
+                to: 48
+                stepSize: 1
+                minLabel: "Small"
+                maxLabel: "Large"
+                value: Settings.barHeight
+                onMoved: v => Settings.set("barHeight", Math.round(v))
+            }
+        }
+
+        SettingsRow {
+            title: "Opacity"
+            subtitle: Settings.transparency ? "" : "Transparency is off in Performance, so the bar is solid"
+            enabled: Settings.transparency
+
+            SettingsSlider {
+                from: 0
+                to: 1
+                stepSize: 0.02
+                minLabel: "Clear"
+                maxLabel: "Solid"
+                value: Settings.barOpacity
+                onMoved: v => Settings.set("barOpacity", v)
+            }
+        }
+
+        SettingsRow {
+            title: "Show Now Playing"
+            subtitle: "Current track with playback controls"
+
+            Switch {
+                checked: Settings.barShowMedia
+                onToggled: on => Settings.set("barShowMedia", on)
+            }
+        }
+    }
+
+    SettingsGroup {
         title: "Dock"
 
         SettingsRow {

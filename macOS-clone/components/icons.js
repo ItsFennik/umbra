@@ -53,6 +53,7 @@ var paths = {
     "cpu": "M5 5h14v14H5z M9 9h6v6H9z M9 1v4 M15 1v4 M9 19v4 M15 19v4 M1 9h4 M1 15h4 M19 9h4 M19 15h4",
     "activity": "M22 12h-4l-3 9L9 3l-3 9H2",
     "arrow-up": "M12 19V5 M5 12l7-7 7 7",
+    "arrow-right": "M5 12h14 M12 5l7 7-7 7",
     "arrow-down": "M12 5v14 M19 12l-7 7-7-7",
     "trash": "M3 6h18 M8 6V4h8v2 M19 6l-1 14H6L5 6",
     "grip": "M9 6h.01 M15 6h.01 M9 12h.01 M15 12h.01 M9 18h.01 M15 18h.01",

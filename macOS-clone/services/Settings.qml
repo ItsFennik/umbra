@@ -18,6 +18,10 @@ Singleton {
     readonly property bool dockShowIndicators: value("dockShowIndicators")
     readonly property bool dockShowRunning: value("dockShowRunning")
 
+    readonly property int barHeight: value("barHeight")
+    readonly property real barOpacity: value("barOpacity")
+    readonly property bool barShowMedia: value("barShowMedia")
+
     readonly property string fontFamily: value("fontFamily")
     readonly property string fallbackFont: value("fallbackFont")
     readonly property string emojiFont: value("emojiFont")
@@ -31,6 +35,7 @@ Singleton {
     readonly property bool gtkMatugen: value("gtkMatugen")
 
     readonly property var keys: ["showDock", "dockIconSize", "dockMagnification", "dockMagnificationScale", "dockAutoHide", "dockAnimateLaunch", "dockShowIndicators", "dockShowRunning",
+        "barHeight", "barOpacity", "barShowMedia",
         "fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight", "animations", "blur", "transparency", "gtkMatugen"]
     readonly property var fontKeys: ["fontFamily", "fallbackFont", "emojiFont", "fontSize", "fontWeight"]
 
@@ -106,6 +111,9 @@ Singleton {
             property bool dockAnimateLaunch: Config.dockAnimateLaunch
             property bool dockShowIndicators: Config.dockShowIndicators
             property bool dockShowRunning: Config.dockShowRunning
+            property int barHeight: Config.barHeight
+            property real barOpacity: Config.barOpacity
+            property bool barShowMedia: Config.barShowMedia
             property string fontFamily: Config.fontFamily
             property string fallbackFont: Config.fallbackFont
             property string emojiFont: Config.emojiFont

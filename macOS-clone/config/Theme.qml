@@ -58,7 +58,8 @@ Singleton {
     readonly property color hover: dark ? Qt.rgba(1, 1, 1, 0.12) : Qt.rgba(0, 0, 0, 0.08)
 
     // Tints are opaque enough to stay legible when the compositor provides no blur.
-    readonly property color barBackground: surface(m("surface", dark ? Qt.rgba(22 / 255, 22 / 255, 24 / 255, 0.62) : Qt.rgba(246 / 255, 246 / 255, 248 / 255, 0.66), dark ? 0.62 : 0.66))
+    readonly property real barOpacity: Math.max(0, Math.min(1, Settings.barOpacity))
+    readonly property color barBackground: surface(m("surface", dark ? Qt.rgba(22 / 255, 22 / 255, 24 / 255, barOpacity) : Qt.rgba(246 / 255, 246 / 255, 248 / 255, barOpacity), barOpacity))
     readonly property color dockBackground: surface(m("surface_container", dark ? Qt.rgba(36 / 255, 36 / 255, 40 / 255, 0.58) : Qt.rgba(246 / 255, 246 / 255, 248 / 255, 0.6), dark ? 0.58 : 0.6))
     readonly property color dockBorder: m("outline_variant", dark ? Qt.rgba(1, 1, 1, 0.14) : Qt.rgba(0, 0, 0, 0.1), 0.5)
     readonly property color indicator: m("on_surface", dark ? Qt.rgba(1, 1, 1, 0.8) : Qt.rgba(0, 0, 0, 0.6), dark ? 0.8 : 0.6)
@@ -74,7 +75,7 @@ Singleton {
     readonly property color destructive: m("error", dark ? "#ff453a" : "#ff3b30")
 
     // Metrics
-    readonly property int barHeight: Math.max(28, px(13) + 15)
+    readonly property int barHeight: Math.max(Math.min(48, Settings.barHeight), px(13) + 11)
     readonly property int dockIconSize: Settings.dockIconSize
     readonly property int dockPadding: 6
     readonly property int dockSpacing: 4

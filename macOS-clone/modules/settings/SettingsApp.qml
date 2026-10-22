@@ -56,7 +56,7 @@ Scope {
                 { id: "fonts", text: "Fonts", icon: "type", tint: "#5e5ce6", keywords: "font typeface text size weight emoji fallback" },
                 { id: "wallpaper", text: "Wallpaper", icon: "image", tint: "#32ade6", keywords: "background picture" },
                 { id: "live", text: "Live Wallpaper", icon: "film", tint: "#0a84ff", keywords: "video animated motion mpvpaper wallpaper background" },
-                { id: "dock", text: "Desktop & Dock", icon: "monitor", tint: "#636366", keywords: "size magnification zoom hide effects animation indicators" },
+                { id: "dock", text: "Desktop & Dock", icon: "monitor", tint: "#636366", keywords: "menu bar height opacity transparent music media now playing size magnification zoom hide effects animation indicators" },
                 { id: "widgets", text: "Widgets", icon: "grid", tint: "#30b0c7", keywords: "desktop clock calendar battery network speed cpu memory ram music media visualizer workspaces layout" },
                 { id: "profiles", text: "Profiles", icon: "layers", tint: "#34c759", keywords: "profile save switch theme layout configuration preset" },
                 { id: "performance", text: "Performance", icon: "gauge", tint: "#ff453a", keywords: "animations motion blur transparency speed battery reduce" },

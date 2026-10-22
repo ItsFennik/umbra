@@ -27,6 +27,8 @@ qs -p ~/Projects/macOS-clone
   - `cliphist`: clipboard history in the launcher (`c>`), with `wl-paste --watch cliphist store` running
   - a terminal for `> command` in the launcher: `$TERMINAL`, else foot, kitty, alacritty, …
   - `matugen`: wallpaper-matched colors (toggle in Control Center or `ipc call colors toggle`)
+  - `mpvpaper`: live (video) wallpapers; `ffmpegthumbnailer` or `ffmpeg` for their thumbnails
+  - PAM: the lock screen checks passwords with the `login` service
   - `ext-workspace-v1`: workspaces
   - window capture support: overview thumbnails (app icons otherwise)
 
@@ -59,10 +61,37 @@ hl.bind("SUPER + C",   hl.dsp.exec_cmd(umbra .. "controlcenter toggle"))
 
 Each target also has `open` and `close`; `notifications` has `clear`.
 `settings toggle` opens Umbra Settings (also in the logo menu and Control Center); `settings page <name>`
-opens a page: `user`, `appearance`, `fonts`, `wallpaper`, `dock`, `widgets`, `profiles`, `performance`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
+opens a page: `user`, `appearance`, `fonts`, `wallpaper`, `live`, `dock`, `widgets`, `profiles`, `performance`, `themes`, `icons`, `cursors`. Choosing a profile picture uses `zenity`.
 `power toggle` opens the power menu (arrow keys and Enter, or the hinted letter: L, S, R, U, O); `power restart`, `shutdown` and `logout` ask first and
-count down from 60 seconds, `power sleep` and `lock` act at once. Lock Screen runs `loginctl lock-session`, so it needs
-a locker listening for it (e.g. hypridle with hyprlock).
+count down from 60 seconds, `power sleep` and `lock` act at once.
+`media toggle` opens the Now Playing popout; `media playPause`, `next` and `previous` control the current player.
+
+## Lock screen
+
+Umbra locks with `ext-session-lock` and draws the Orbital clockwork skin on every screen: minute and
+second dials orbit the hour, and unlocking winds them up until they burst. Passwords go through PAM.
+It locks from the logo menu, the power menu, `ipc call lock lock`, or logind's Lock signal, so
+`loginctl lock-session` and idle daemons such as hypridle (`lock_cmd = loginctl lock-session`) work
+without a separate locker.
+
+## Menu bar and Now Playing
+
+Settings > Desktop & Dock sets the menu bar's height and background opacity. While a player is open
+the bar shows its track with previous / play-pause / next; it stays there while paused. Click the
+track for the Now Playing popout, centred under it: artwork, album, seekable progress, cava
+spectrum, player volume and a switcher when several players are open. Scroll over the track to skip.
+
+## Wallpapers
+
+Settings > Wallpaper picks a still image from `~/Pictures/Wallpapers`. Settings > Live Wallpaper
+plays a video from `~/Videos/Wallpapers` (folder editable there) behind the desktop with `mpvpaper`,
+muted, looping and paused while covered. Wallpaper colors then come from a frame of the video.
+Choosing a still image turns the live wallpaper off. Both are remembered in
+`$XDG_STATE_HOME/umbra/wallpaper.json` and saved in profiles.
+
+```sh
+qs -p ~/Projects/macOS-clone ipc call wallpaper live ~/Videos/Wallpapers/rain.mp4   # also: liveOff, liveFolder <dir>
+```
 
 ## Launcher
 
@@ -147,7 +176,7 @@ qs -p ~/Projects/macOS-clone ipc call profiles apply Evening           # also: l
 - `services/`: system and compositor integration, no UI
   - `services/adapters/`: compositor-specific extras, loaded only when detected
 - `components/`: shared widgets (icons, slider, switch, popup surface)
-- `modules/`: bar, dock, launcher, controlcenter, notifications, overview, widgets
+- `modules/`: bar, dock, launcher, controlcenter, media, notifications, overview, lock, power, menu, settings, wallpaper, widgets
 
 Dock pins are stored in `$XDG_STATE_HOME/umbra/dock.json`, Umbra Settings in `settings.json` next to it.
 
@@ -159,3 +188,8 @@ Umbra assumes only standard protocols. Two notes:
   Elsewhere it shows all windows and says so.
 - Only one notification server can own the bus name. Stop any other notification
   daemon or shell to receive notifications in Umbra.
+
+## Credits
+
+- Credits to **Ryoku**: the lock screen is the Orbital skin Ryoku brought over from
+  [qylock](https://github.com/Darkkal44/qylock) by Darkkal44 (GPL-3.0).

@@ -34,6 +34,11 @@ Singleton {
     readonly property bool dockAnimateLaunch: true
     readonly property bool dockShowIndicators: true
     readonly property bool dockShowRunning: true
+    // Menu bar height in px (raised if the font needs more), background opacity (0 clear to 1 solid),
+    // and whether the current track shows in the menu bar.
+    readonly property int barHeight: 28
+    readonly property real barOpacity: 0.64
+    readonly property bool barShowMedia: true
 
     // Preferred UI fonts, first installed one wins, while Umbra Settings leaves the font on Automatic.
     readonly property list<string> fontFamilies: ["SF Pro Text", "Inter", "Geist", "Noto Sans", "Cantarell"]

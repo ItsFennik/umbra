@@ -37,8 +37,11 @@ Singleton {
         const projection = screen ? WindowManager.screenProjection(screen) : null;
         const sets = (projection ? projection.windowsets : WindowManager.windowsets).filter(w => w.shouldDisplay);
         return sets.sort((a, b) => {
-            if (a.coordinates.length && b.coordinates.length)
-                return a.coordinates[0] - b.coordinates[0];
+            // Lexicographic: niri reports [0, index], Hyprland a single [index].
+            for (let i = 0; i < Math.min(a.coordinates.length, b.coordinates.length); i++) {
+                if (a.coordinates[i] !== b.coordinates[i])
+                    return a.coordinates[i] - b.coordinates[i];
+            }
             const na = parseInt(a.name), nb = parseInt(b.name);
             return (isNaN(na) || isNaN(nb)) ? a.name.localeCompare(b.name) : na - nb;
         });
