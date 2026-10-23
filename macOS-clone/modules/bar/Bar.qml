@@ -94,12 +94,14 @@ PanelWindow {
         }
     }
 
-    // Text items get the same side padding as buttons.
+    // Text items get the same side padding as buttons. Their visibility binds to the underlying
+    // condition, not the child's `visible`: that reads false while this wrapper is hidden, so a
+    // wrapper hidden once at startup (no data yet) would never show again.
     Component {
         id: activeAppPart
 
         Item {
-            visible: app.visible
+            visible: app.text !== ""
             implicitWidth: app.implicitWidth + 14
             implicitHeight: app.implicitHeight
             ActiveApp { id: app; anchors.centerIn: parent }
@@ -110,7 +112,7 @@ PanelWindow {
         id: workspacesPart
 
         Item {
-            visible: spaces.visible
+            visible: Compositor.workspacesAvailable
             implicitWidth: spaces.implicitWidth + 14
             implicitHeight: spaces.implicitHeight
             Workspaces { id: spaces; anchors.centerIn: parent; screen: bar.screen }
